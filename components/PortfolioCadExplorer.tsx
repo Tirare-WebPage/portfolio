@@ -13,6 +13,8 @@ type CadModel = {
   question: string;
 };
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 // The four entries pair the model slots with the design logic supplied by Anurag.
 // Once the real public-safe GLBs are inspected, refine each label to match its geometry.
 const models: CadModel[] = [
@@ -94,6 +96,7 @@ export default function PortfolioCadExplorer() {
   const [message, setMessage] = useState("");
   const hostRef = useRef<HTMLDivElement>(null);
   const model = models.find((item) => item.id === selectedId) ?? models[0];
+  const modelFileUrl = `${publicBasePath}${model.file}`;
 
   useEffect(() => {
     let cancelled = false;
@@ -101,7 +104,7 @@ export default function PortfolioCadExplorer() {
     setActiveUrl(null);
     setMessage("");
 
-    fetch(model.file, { method: "HEAD", cache: "no-store" })
+    fetch(modelFileUrl, { method: "HEAD", cache: "no-store" })
       .then((response) => {
         if (cancelled) return;
         if (!response.ok) {
@@ -109,7 +112,7 @@ export default function PortfolioCadExplorer() {
           setMessage(`The public model export has not been added yet. Its expected location is public${model.file}.`);
           return;
         }
-        setActiveUrl(model.file);
+        setActiveUrl(modelFileUrl);
         setStatus("loading");
       })
       .catch(() => {

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
+const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export const metadata: Metadata = {
   title: "Anurag Mishra — Work, Research & Notes",
   description:
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
       "Projects, research, and the stories behind the work. A record of what was built, what changed, and what still needs proving.",
     type: "website",
   },
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: `${publicBasePath}/favicon.svg` },
 };
 
 export const viewport: Viewport = {
