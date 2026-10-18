@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Anurag Mishra — Work, Research & Notes</title><meta name="description" content="A personal portfolio documenting projects, research and the stories behind the work."><style>:root {
+  --ink: #202821;
+  --muted: #647066;
+  --forest: #19251e;
+  --forest-soft: #243128;
+  --paper: #f4f3ed;
+  --paper-2: #ebeae1;
+  --white: #fffefa;
+  --line: #d9d9cf;
+  --line-dark: #465248;
+  --blue: #a9c3ff;
+  --blue-strong: #466fb3;
+  --green: #47705a;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: Inter, "Segoe UI", Arial, sans-serif;
+  --shell: 1180px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+button, input, textarea { font: inherit; }
+a { color: inherit; text-decoration: none; }
+button { color: inherit; }
+::selection { background: #cddcff; color: #1b2a3e; }
+.skip-link { position: fixed; z-index: 1000; top: -60px; left: 15px; padding: 10px 14px; background: var(--white); color: var(--ink); }
+.skip-link:focus { top: 12px; }
+.page-shell { width: min(calc(100% - 64px), var(--shell)); margin-inline: auto; }
+
+/* Navigation */
+.site-header { position: sticky; z-index: 50; top: 0; min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 0 max(32px, calc((100vw - var(--shell)) / 2)); border-bottom: 1px solid rgba(32,40,33,.12); background: rgba(244,243,237,.94); backdrop-filter: blur(16px); }
+.portfolio-brand { display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.portfolio-monogram { width: 37px; height: 37px; display: inline-grid; place-items: center; border: 1px solid #7b887d; border-radius: 50%; font: 16px var(--serif); letter-spacing: -.08em; }
+.portfolio-monogram span { color: var(--blue-strong); }
+.portfolio-brand-text { display: flex; flex-direction: column; gap: 4px; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+.portfolio-brand-text small { color: #788177; font-size: 8px; font-weight: 650; letter-spacing: .13em; }
+.portfolio-nav { display: flex; align-items: center; gap: clamp(16px, 2.5vw, 31px); }
+.portfolio-nav a { color: #606a60; font-size: 11px; transition: color .18s ease; }
+.portfolio-nav a:hover { color: #202821; }
+.portfolio-nav .nav-contact { display: inline-flex; gap: 7px; align-items: center; color: var(--ink); border: 1px solid #bec5b9; padding: 10px 12px; }
+.mobile-menu-button { display: none; background: transparent; border: 1px solid var(--line); padding: 9px; cursor: pointer; }
+
+/* Hero */
+.section-dark { background: var(--forest); color: var(--white); }
+.hero { position: relative; overflow: hidden; }
+.hero-grid { position: absolute; inset: 0; pointer-events: none; opacity: .15; background-image: linear-gradient(rgba(221,232,222,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(221,232,222,.08) 1px, transparent 1px); background-size: 52px 52px; mask-image: linear-gradient(90deg, transparent, black 50%, black); }
+.hero-content { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,.92fr) minmax(0,1.08fr); gap: clamp(40px, 6vw, 90px); align-items: center; padding-top: clamp(75px, 9vw, 120px); padding-bottom: clamp(55px, 7vw, 95px); }
+.hero-copy { max-width: 575px; }
+.eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 18px; color: #7a877d; font-size: 9px; line-height: 1.6; font-weight: 800; letter-spacing: .17em; text-transform: uppercase; }
+.light-eyebrow { color: #a0afa3; }
+.eyebrow-line { display: inline-block; width: 25px; height: 1px; background: #91a18f; }
+.hero h1 { max-width: 640px; margin: 0; font-size: clamp(44px, 5.7vw, 77px); font-weight: 540; letter-spacing: -.067em; line-height: .99; }
+.hero h1 em, h2 em { color: #b8c8b4; font-family: var(--serif); font-weight: 400; }
+.hero-deck { max-width: 490px; margin: 26px 0 0; color: #c2cbc1; font-size: 14px; line-height: 1.85; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 21px; margin-top: 31px; }
+.button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 0 17px; font-size: 11px; font-weight: 750; transition: transform .18s ease, background .18s ease; }
+.button:hover { transform: translateY(-2px); }
+.button-light { color: #17221b; background: var(--white); }
+.button-light:hover { background: #dce5dc; }
+.text-link { display: inline-flex; gap: 8px; align-items: center; font-size: 11px; font-weight: 650; }
+.text-link-light { color: #d9e2d8; }
+.text-link-light:hover { color: #fff; }
+.text-link-dark { display: inline-flex; align-items: center; gap: 7px; color: var(--ink); font-size: 11px; font-weight: 700; border-bottom: 1px solid #aab6ab; padding-bottom: 4px; }
+.text-link-dark:hover { border-color: var(--blue-strong); }
+.hero-visual-wrap { min-width: 0; }
+.portfolio-hero-art { border: 1px solid #405045; background: rgba(17,26,20,.35); padding: 14px 16px 12px; }
+.art-topline, .art-bottomline { display: flex; justify-content: space-between; gap: 12px; color: #96a499; font-size: 8px; letter-spacing: .14em; font-weight: 750; }
+.art-topline span:first-child { display: inline-flex; gap: 8px; align-items: center; }
+.art-topline i { width: 6px; height: 6px; background: var(--blue); border-radius: 50%; }
+.portfolio-trike-svg { width: 100%; display: block; height: auto; margin: 10px 0 4px; }
+.art-bottomline { padding-top: 12px; border-top: 1px solid #344238; color: #738076; font-size: 7px; }
+.hero-visual-caption { margin: 12px 0 0; color: #8e9a90; font-size: 10px; line-height: 1.6; }
+.hero-bottom { position: relative; z-index: 1; display: flex; justify-content: space-between; gap: 20px; padding: 15px 0 17px; border-top: 1px solid #3c493e; color: #8f9d90; font-size: 8px; letter-spacing: .14em; font-weight: 700; }
+.scroll-cue { display: inline-flex; align-items: center; gap: 8px; }
+.portfolio-intro-strip { display: grid; grid-template-columns: repeat(4, 1fr); background: #e9e9e0; border-bottom: 1px solid var(--line); }
+.portfolio-intro-strip > div { padding: 22px clamp(18px, 3.2vw, 48px); border-right: 1px solid #d1d3c8; }
+.portfolio-intro-strip > div:first-child { padding-left: max(32px, calc((100vw - var(--shell)) / 2)); }
+.portfolio-intro-strip > div:last-child { border-right: 0; padding-right: max(32px, calc((100vw - var(--shell)) / 2)); }
+.intro-strip-kicker { display: block; margin-bottom: 8px; color: #7b857a; font-size: 8px; font-weight: 800; letter-spacing: .14em; }
+.portfolio-intro-strip strong { display: block; font-size: 13px; line-height: 1.4; letter-spacing: -.02em; }
+.portfolio-intro-strip small { display: block; margin-top: 5px; color: #6b756c; font-size: 10px; line-height: 1.5; }
+
+/* Shared sections */
+.section { padding: clamp(72px, 9vw, 122px) 0; }
+.section-paper { background: var(--paper); }
+.section-white { background: var(--white); }
+.section-cream-dark { background: #eeede4; }
+.section-layout { display: grid; grid-template-columns: 165px minmax(0, 1fr); gap: clamp(38px, 7vw, 100px); }
+.section-aside { display: flex; flex-direction: column; align-items: flex-start; padding-top: 9px; }
+.section-number { color: #778279; font-size: 9px; letter-spacing: .15em; font-weight: 800; white-space: nowrap; }
+.aside-rule { display: block; width: 30px; height: 1px; background: #aab3a7; margin: 23px 0 16px; }
+.section-aside p { margin: 0; color: #818b80; font: italic 16px/1.35 var(--serif); }
+.section-aside-light .section-number, .section-aside-light p { color: #9caa9d; }
+.section-aside-light .aside-rule { background: #5b695e; }
+.section-main { min-width: 0; }
+.section-main h2, .section-heading-row h2 { margin: 0; font-size: clamp(38px, 4.4vw, 58px); line-height: 1.04; letter-spacing: -.062em; font-weight: 530; }
+.section-main h2 em, .section-heading-row h2 em { color: #63816b; }
+.section-lead { max-width: 720px; margin: 22px 0 35px; color: #5c685e; font-size: 14px; line-height: 1.85; }
+.section-heading-row { display: grid; grid-template-columns: minmax(0, .9fr) minmax(250px, .65fr); align-items: end; gap: 70px; margin-bottom: 42px; }
+.section-heading-row h2 { margin-top: 0; }
+.section-intro { max-width: 420px; margin: 0 0 4px; color: #5e695f; font-size: 13px; line-height: 1.85; }
+
+/* Project archive */
+.project-feature { background: #e9e9df; border: 1px solid #d4d7cc; }
+.project-feature-top { display: flex; justify-content: space-between; gap: 15px; padding: 14px 19px; border-bottom: 1px solid #d4d7cc; color: #778279; font-size: 8px; font-weight: 800; letter-spacing: .14em; }
+.project-status { display: inline-flex; align-items: center; gap: 7px; white-space: nowrap; }
+.project-status i { width: 6px; height: 6px; border-radius: 50%; background: #779778; }
+.project-feature-body { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(230px, .8fr); }
+.project-feature-copy { padding: clamp(23px, 4vw, 48px); }
+.project-feature-copy h3 { margin: 0; font-size: clamp(32px, 4vw, 48px); letter-spacing: -.06em; font-weight: 550; }
+.project-subtitle { margin: 5px 0 22px !important; color: #51745e !important; font: italic 17px var(--serif) !important; }
+.project-feature-copy > p:not(.project-subtitle) { margin: 0 0 17px; max-width: 530px; color: #566258; font-size: 12px; line-height: 1.85; }
+.project-role { padding-top: 16px; border-top: 1px solid #d0d3c8; }
+.project-role strong { color: var(--ink); }
+.project-link-row { margin-top: 23px; }
+.project-feature-side { display: flex; flex-direction: column; border-left: 1px solid #d4d7cc; }
+.project-note-line { flex: 1; padding: 22px 25px; border-bottom: 1px solid #d4d7cc; }
+.project-note-line:last-child { border-bottom: 0; }
+.project-note-line > span { display: block; margin-bottom: 10px; color: #7f887d; font-size: 8px; font-weight: 800; letter-spacing: .15em; }
+.project-note-line strong { font-size: 13px; line-height: 1.45; font-weight: 700; }
+.project-note-line p { margin: 6px 0 0; color: #697369; font-size: 10px; line-height: 1.7; }
+.project-row { display: grid; grid-template-columns: 45px minmax(0, 1fr) 170px; gap: 20px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+.project-row-index { color: #93a095; font: 22px var(--serif); }
+.project-row-main .eyebrow { margin-bottom: 7px; font-size: 8px; }
+.project-row-main h3 { margin: 0; font-size: clamp(20px, 2.4vw, 28px); letter-spacing: -.045em; font-weight: 560; }
+.project-row-main > p:not(.eyebrow) { max-width: 700px; margin: 10px 0 0; color: #59665b; font-size: 12px; line-height: 1.85; }
+.project-row-main .project-status-text { color: #788176; font-size: 10px !important; }
+.project-row-aside { display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 15px; padding-top: 3px; }
+.project-row-aside > span { color: #899287; font-size: 8px; font-weight: 800; letter-spacing: .11em; }
+.project-row-aside a { display: inline-flex; align-items: center; gap: 7px; color: #3f5c47; font-size: 10px; font-weight: 750; }
+.project-row-aside a:hover { color: var(--blue-strong); }
+.project-row-last { border-bottom: 0; padding-bottom: 0; }
+
+/* How I think */
+.thinking-sequence { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 26px 0 62px; }
+.thinking-sequence article { padding: 20px 17px 24px 0; border-right: 1px solid var(--line); margin-right: 17px; }
+.thinking-sequence article:last-child { margin-right: 0; padding-right: 0; border-right: 0; }
+.thinking-sequence article > span { color: #819084; font: 20px var(--serif); }
+.thinking-sequence h3 { margin: 21px 0 7px; font-size: 14px; font-weight: 700; }
+.thinking-sequence p { margin: 0; color: #657066; font-size: 10px; line-height: 1.8; }
+.cad-section-intro { display: flex; justify-content: space-between; align-items: end; gap: 45px; margin-bottom: 26px; }
+.cad-section-intro h3 { margin: 0; font-size: 25px; letter-spacing: -.045em; font-weight: 550; }
+.cad-section-intro > p { max-width: 410px; margin: 0; color: #687267; font-size: 11px; line-height: 1.8; }
+
+/* CAD explorer */
+.cad-explorer { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(235px, .65fr); gap: 24px; align-items: stretch; }
+.cad-viewer-column { min-width: 0; border: 1px solid #d1d5ca; background: #ecebe3; }
+.cad-viewer-topline { min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 15px; border-bottom: 1px solid #d1d5ca; color: #727c73; font-size: 9px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; }
+.cad-status { display: inline-flex; align-items: center; gap: 7px; }
+.status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #a39f92; }
+.status-ready { background: #47835d; }
+.status-error { background: #b65342; }
+.status-loading, .status-checking { background: #bd9b52; }
+.status-missing { background: #928a79; }
+.cad-viewer-stage { position: relative; min-height: 395px; height: clamp(390px, 42vw, 560px); overflow: hidden; display: grid; place-items: center; background-color: #e7e5dd; background-image: linear-gradient(rgba(55, 65, 57, .045) 1px, transparent 1px), linear-gradient(90deg, rgba(55, 65, 57, .045) 1px, transparent 1px); background-size: 32px 32px; }
+.model-host { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; }
+.model-viewer-element { display: block; width: 100%; height: 100%; background: transparent; --poster-color: transparent; }
+.cad-empty-state { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; max-width: 390px; padding: 38px 28px; text-align: center; }
+.cad-placeholder-mark { position: relative; display: grid; place-items: center; color: #65746b; height: 58px; width: 58px; margin-bottom: 19px; border: 1px solid #bcc1b7; border-radius: 50%; }
+.cad-placeholder-mark span { position: absolute; width: 7px; height: 7px; right: 7px; top: 7px; background: var(--blue-strong); border-radius: 50%; }
+.cad-empty-state h3 { margin: 0; font-size: 18px; letter-spacing: -.03em; font-weight: 600; }
+.cad-empty-state p { margin: 10px 0 0; color: #667168; font-size: 11px; line-height: 1.75; }
+.cad-empty-state code { margin-top: 12px; display: block; padding: 7px 9px; background: #dddbd2; border: 1px solid #cfcec5; overflow-wrap: anywhere; color: #354139; font-size: 10px; }
+.cad-viewer-stage.has-model .cad-empty-state { display: none; }
+.cad-viewer-controls { display: flex; min-height: 49px; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 13px; border-top: 1px solid #d1d5ca; color: #707a71; font-size: 10px; }
+.cad-tool-buttons { display: flex; gap: 6px; }
+.cad-tool-buttons button { display: inline-flex; gap: 6px; align-items: center; justify-content: center; padding: 7px 9px; border: 1px solid #c9cbc1; background: transparent; font-size: 10px; cursor: pointer; }
+.cad-tool-buttons button:hover:not(:disabled) { background: var(--white); }
+.cad-tool-buttons button:disabled { opacity: .45; cursor: not-allowed; }
+.cad-model-list { border-top: 1px solid var(--line); align-self: stretch; display: flex; flex-direction: column; }
+.cad-list-kicker { margin: 0; padding: 14px 0; color: #768078; font-size: 9px; letter-spacing: .15em; font-weight: 800; }
+.cad-model-option { width: 100%; min-height: 76px; display: grid; grid-template-columns: 27px minmax(0, 1fr) 18px; gap: 9px; align-items: center; text-align: left; border: 0; border-top: 1px solid var(--line); background: transparent; padding: 12px 10px 12px 0; cursor: pointer; transition: background .15s ease, padding .15s ease; }
+.cad-model-option:hover { padding-left: 7px; background: rgba(255,255,255,.55); }
+.cad-model-option.is-selected { background: var(--white); padding-left: 9px; box-shadow: inset 2px 0 var(--blue-strong); }
+.cad-model-index { font-family: var(--serif); font-size: 17px; color: #78867e; }
+.cad-model-option.is-selected .cad-model-index { color: var(--blue-strong); }
+.cad-model-label { font-size: 12px; font-weight: 650; letter-spacing: -.01em; }
+.cad-model-label small { display: block; font-size: 9px; font-weight: 450; color: #858d86; margin-top: 5px; letter-spacing: 0; }
+.cad-model-arrow { color: #8c958e; font-size: 17px; }
+.cad-list-note { display: flex; gap: 13px; align-items: flex-start; border-top: 1px solid var(--line); margin-top: auto; padding: 20px 0 5px; }
+.small-rule { display: block; flex: 0 0 23px; height: 1px; background: #78867e; margin-top: 8px; }
+.cad-list-note p { margin: 0; color: #747d75; font-size: 10px; line-height: 1.8; }
+.cad-caption { color: #687268; font-size: 10px; margin: 15px 0 0; line-height: 1.65; }
+.cad-caption code { background: #e7e5dd; padding: 2px 5px; }
+.cad-reasoning-panel { display: grid; grid-template-columns: 105px minmax(0, 1fr); gap: clamp(20px, 4vw, 54px); padding: 31px 0 0; margin-top: 27px; border-top: 1px solid var(--line); }
+.cad-reasoning-number { color: #9aa7a0; font-family: var(--serif); font-size: clamp(46px, 6vw, 70px); line-height: .92; letter-spacing: -.06em; }
+.cad-reasoning-content { max-width: 790px; }
+.cad-reasoning-content .eyebrow { margin-bottom: 11px; }
+.cad-reasoning-content h3 { max-width: 700px; margin: 0; font-size: clamp(22px, 2.5vw, 31px); font-weight: 540; line-height: 1.16; letter-spacing: -.04em; }
+.cad-reasoning-content > p:not(.eyebrow) { max-width: 780px; margin: 14px 0 0; color: #59645b; font-size: 12px; line-height: 1.9; }
+.cad-reasoning-content blockquote { margin: 18px 0 0; padding: 12px 0 12px 15px; border-left: 2px solid #8fa0bf; color: #39463e; font-family: var(--serif); font-size: 16px; line-height: 1.5; }
+
+/* Stories */
+.stories-list { border-top: 1px solid #d5d7cd; margin-top: 32px; }
+.story-item { border-bottom: 1px solid #d5d7cd; }
+.story-item summary { display: grid; grid-template-columns: 46px minmax(0, 1fr) 24px; align-items: center; gap: 18px; min-height: 91px; cursor: pointer; list-style: none; }
+.story-item summary::-webkit-details-marker { display: none; }
+.story-number { color: #9aa69a; font: 22px var(--serif); }
+.story-summary-copy { display: flex; flex-direction: column; gap: 7px; }
+.story-summary-copy small { color: #788479; font-size: 8px; font-weight: 800; letter-spacing: .14em; }
+.story-summary-copy strong { font-size: clamp(17px, 2vw, 23px); line-height: 1.25; font-weight: 560; letter-spacing: -.035em; }
+.story-open { width: 24px; height: 24px; display: grid; place-items: center; border: 1px solid #c6ccc1; color: #5d6e61; border-radius: 50%; transition: transform .15s ease; }
+.story-item[open] .story-open { transform: rotate(45deg); }
+.story-body { max-width: 750px; padding: 0 45px 29px 64px; color: #59655b; font-size: 12px; line-height: 1.9; animation: fade-in .2s ease; }
+.story-body p { margin: 0 0 14px; }
+.story-body p:last-child { margin-bottom: 0; }
+.story-footnote { color: #838b81; font-size: 10px; }
+.story-media-slot { display: flex; flex-direction: column; align-items: flex-start; gap: 7px; margin-top: 18px; padding: 17px; border: 1px dashed #bdc5b9; background: rgba(255,255,255,.45); }
+.story-media-slot > span { color: #849082; font-size: 8px; font-weight: 800; letter-spacing: .15em; }
+.story-media-slot strong { color: #344439; font-size: 11px; font-weight: 700; }
+.story-media-slot small { color: #7c867b; font-size: 9px; }
+@keyframes fade-in { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* MRII / architecture */
+.portfolio-architecture { background: #1b2720; }
+.portfolio-architecture .section-main h2 em { color: #b8c8b4; }
+.architecture-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 23px 0 34px; }
+.architecture-intro-grid p { margin: 0; color: #bdc8bd; font-size: 12px; line-height: 1.85; }
+.torque-equation { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 21px 22px; margin: 30px 0; border: 1px solid #465449; background: #202f25; }
+.torque-equation span { font: clamp(16px, 2.1vw, 23px) var(--serif); color: #edf1eb; }
+.torque-equation b { color: #9fb8ff; font-size: 17px; font-weight: 400; }
+.mrii-specimen-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 19px; padding-bottom: 44px; }
+.mrii-specimen { border-top: 1px solid #536056; padding-top: 17px; }
+.mrii-specimen > span { color: #8e9f91; font-size: 8px; letter-spacing: .14em; font-weight: 800; }
+.mrii-specimen h3 { margin: 18px 0 10px; font-size: 19px; line-height: 1.2; letter-spacing: -.035em; font-weight: 550; }
+.mrii-specimen p { margin: 0; color: #aab7aa; font-size: 11px; line-height: 1.85; }
+.mrii-video-block { display: grid; grid-template-columns: minmax(210px, .65fr) minmax(0, 1.35fr); align-items: center; gap: 35px; padding: 30px 0 35px; border-top: 1px solid #435044; }
+.mrii-video-block h3 { margin: 0; font-size: clamp(20px, 2.5vw, 29px); line-height: 1.15; font-weight: 550; letter-spacing: -.045em; }
+.mrii-video-block > div:first-child > p:not(.eyebrow) { color: #aebaae; font-size: 11px; line-height: 1.8; }
+.mrii-video-block .text-link { margin-top: 9px; }
+.video-frame { width: 100%; aspect-ratio: 16 / 9; border: 1px solid rgba(255,255,255,.12); background: #0b0f0d; overflow: hidden; }
+.video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
+.patent-line { display: grid; grid-template-columns: minmax(190px, .65fr) minmax(0, 1fr); align-items: center; gap: 26px; border-top: 1px solid #435044; padding-top: 21px; }
+.patent-line div { display: flex; flex-direction: column; gap: 9px; }
+.patent-line div span { color: #91a194; font-size: 8px; letter-spacing: .14em; font-weight: 800; }
+.patent-line div strong { color: #eef2ec; font: 22px var(--serif); }
+.patent-line p { max-width: 490px; margin: 0; color: #a4b0a4; font-size: 10px; line-height: 1.8; }
+
+/* Research */
+.research-paper-header { display: flex; align-items: flex-end; justify-content: space-between; gap: 22px; padding: 24px 0; margin-top: 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.research-paper-label { margin: 0 0 10px; color: #728075; font-size: 8px; letter-spacing: .15em; font-weight: 800; }
+.research-paper-header h3 { max-width: 700px; margin: 0; font-size: clamp(22px, 2.7vw, 32px); line-height: 1.17; letter-spacing: -.04em; font-weight: 550; }
+.research-status { flex-shrink: 0; padding: 8px 10px; background: #e8eddf; color: #52654e; font-size: 8px; letter-spacing: .1em; font-weight: 800; }
+.research-paper-columns { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(30px, 5vw, 65px); padding-top: 29px; }
+.research-paper-columns h4 { margin: 0 0 7px; color: #46584b; font-size: 10px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.research-paper-columns p { margin: 0 0 22px; color: #5c685d; font-size: 11px; line-height: 1.9; }
+.research-paper-columns p:last-child { margin-bottom: 0; }
+.research-paper-viewer { min-width: 0; border: 1px solid #d6d8ce; background: #f0f0e9; }
+.document-viewer-heading { display: flex; align-items: center; gap: 9px; padding: 12px; color: #6e7b70; font-size: 8px; font-weight: 800; letter-spacing: .11em; }
+.document-viewer-heading a { margin-left: auto; display: grid; place-items: center; width: 29px; height: 29px; border: 1px solid #c4ccc1; }
+.document-viewer-heading a:hover { background: #fff; }
+.research-paper-viewer iframe { display: block; width: 100%; height: 420px; border: 0; background: #fff; }
+.research-paper-viewer > p { margin: 0; padding: 10px 12px; color: #758075; font-size: 9px; line-height: 1.65; }
+.research-workstreams { display: grid; grid-template-columns: 175px minmax(0,1fr); gap: 23px; margin-top: 28px; padding-top: 19px; border-top: 1px solid var(--line); }
+.research-workstreams > span { color: #758176; font-size: 8px; font-weight: 800; letter-spacing: .13em; }
+.research-workstreams p { margin: 0; color: #758075; font-size: 10px; line-height: 1.8; }
+
+/* Recognition and certificate slots */
+.recognition-list { margin-top: 29px; border-top: 1px solid #d3d6cb; }
+.recognition-list article { display: grid; grid-template-columns: 180px minmax(0,1fr); gap: 25px; padding: 19px 0; border-bottom: 1px solid #d3d6cb; }
+.recognition-list article > span, .recognition-feature-label { color: #798579; font-size: 8px; font-weight: 800; letter-spacing: .12em; line-height: 1.6; }
+.recognition-list h3 { margin: 0; font-size: 15px; line-height: 1.4; font-weight: 650; letter-spacing: -.02em; }
+.recognition-list p { margin: 5px 0 0; color: #626e63; font-size: 10px; line-height: 1.8; }
+.recognition-feature { background: #e9e9df; margin-top: 1px; padding: 24px 20px !important; grid-template-columns: 180px minmax(0,1fr) !important; }
+.recognition-feature h3 { font-size: 19px; }
+.recognition-feature .text-link-dark { margin-top: 14px; }
+.evidence-heading { display: grid; grid-template-columns: minmax(0,.7fr) minmax(230px,.6fr); align-items: end; gap: 35px; margin: 48px 0 21px; }
+.evidence-heading .eyebrow { margin-bottom: 9px; }
+.evidence-heading h3 { margin: 0; font-size: 27px; font-weight: 550; letter-spacing: -.045em; }
+.evidence-heading > p { margin: 0; color: #687469; font-size: 10px; line-height: 1.8; }
+.evidence-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; }
+.evidence-tile { display: flex; flex-direction: column; min-width: 0; padding: 0; border: 0; background: transparent; text-align: left; cursor: default; }
+.evidence-tile.has-evidence { cursor: zoom-in; }
+.evidence-thumbnail { position: relative; display: grid; place-items: center; width: 100%; aspect-ratio: 4/3; border: 1px solid #d4d8ce; background: #ecece4; overflow: hidden; }
+.evidence-thumbnail img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 5px; opacity: 0; transition: opacity .2s ease; }
+.evidence-tile.has-evidence .evidence-thumbnail img { opacity: 1; }
+.evidence-placeholder { display: flex; flex-direction: column; align-items: center; gap: 9px; color: #96a195; }
+.evidence-placeholder span { font-size: 7px; letter-spacing: .15em; font-weight: 800; }
+.evidence-open { position: absolute; right: 8px; top: 8px; display: grid; place-items: center; width: 25px; height: 25px; background: rgba(255,254,250,.9); border: 1px solid #d1d7ce; }
+.evidence-label { margin-top: 10px; color: #2a362e; font-size: 10px; font-weight: 750; line-height: 1.5; }
+.evidence-detail { margin-top: 3px; color: #7a857b; font-size: 9px; line-height: 1.55; }
+.evidence-tile code { margin-top: 5px; color: #929a90; font-size: 8px; overflow-wrap: anywhere; }
+.evidence-lightbox { position: fixed; z-index: 500; inset: 0; display: grid; place-items: center; padding: 25px; background: rgba(15,22,17,.83); }
+.evidence-lightbox-panel { position: relative; width: min(100%, 920px); max-height: 90vh; display: flex; flex-direction: column; align-items: center; background: var(--paper); padding: 18px; overflow: auto; }
+.evidence-lightbox-panel img { display: block; max-width: 100%; max-height: 70vh; object-fit: contain; }
+.evidence-lightbox-panel > div { width: 100%; margin-top: 15px; border-top: 1px solid var(--line); padding-top: 12px; }
+.evidence-lightbox-panel strong { font-size: 12px; }
+.evidence-lightbox-panel p { color: var(--muted); font-size: 10px; }
+.lightbox-close { position: absolute; top: 12px; right: 12px; z-index: 3; display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid #d5d9cf; background: #fffefa; cursor: pointer; }
+
+/* About and contact */
+.about-paragraph { max-width: 720px; margin: 25px 0 0; color: #5c685e; font-size: 13px; line-height: 1.95; }
+.about-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 27px; }
+.about-links a { display: inline-flex; align-items: center; gap: 8px; border: 1px solid #c9d0c6; padding: 10px 13px; font-size: 10px; font-weight: 700; }
+.about-links a:hover { background: #ecefe8; }
+.contact-section { padding: clamp(66px, 8vw, 100px) 0 0; }
+.contact-inner { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,.6fr); gap: 65px; align-items: end; padding-bottom: 66px; }
+.contact-inner h2 { margin: 0; font-size: clamp(42px, 5vw, 66px); font-weight: 540; letter-spacing: -.065em; line-height: 1.02; }
+.contact-inner h2 em { color: #b8c8b4; font-family: var(--serif); font-weight: 400; }
+.contact-deck { max-width: 500px; margin: 20px 0 0; color: #b6c0b5; font-size: 12px; line-height: 1.85; }
+.contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 19px; padding-bottom: 5px; }
+.contact-email { display: inline-flex; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 1px solid #667568; color: #f3f5ef; font-size: clamp(15px, 1.9vw, 22px); }
+.contact-email:hover { border-color: #b8c8b4; }
+.site-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 77px; border-top: 1px solid #3e4a40; color: #8e9b90; font-size: 9px; }
+.portfolio-brand-footer .portfolio-monogram { border-color: #59695d; }
+.portfolio-brand-footer .portfolio-brand-text { color: #d3dbd1; }
+.portfolio-brand-footer .portfolio-brand-text small { color: #869489; }
+
+@media (max-width: 1050px) {
+  .page-shell { width: min(calc(100% - 48px), var(--shell)); }
+  .site-header { padding-inline: 24px; }
+  .portfolio-nav { gap: 15px; }
+  .portfolio-nav a { font-size: 10px; }
+  .hero-content { gap: 35px; }
+  .section-layout { grid-template-columns: 125px minmax(0,1fr); gap: 40px; }
+  .project-row { grid-template-columns: 35px minmax(0,1fr) 145px; gap: 15px; }
+  .evidence-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 800px) {
+  html { scroll-padding-top: 73px; }
+  .page-shell { width: min(calc(100% - 38px), var(--shell)); }
+  .site-header { min-height: 70px; padding-inline: 19px; }
+  .mobile-menu-button { display: inline-grid; place-items: center; }
+  .portfolio-nav { display: none; position: absolute; left: 0; right: 0; top: 69px; padding: 12px 19px 19px; background: #f4f3ed; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+  .portfolio-nav.is-open { display: flex; }
+  .portfolio-nav a { padding: 14px 2px; border-bottom: 1px solid #dedfd5; font-size: 12px; }
+  .portfolio-nav .nav-contact { justify-content: space-between; margin-top: 10px; padding: 12px; }
+  .hero-content { grid-template-columns: 1fr; padding-top: 64px; padding-bottom: 50px; gap: 37px; }
+  .hero h1 { max-width: 680px; font-size: clamp(46px, 9vw, 68px); }
+  .hero-deck { max-width: 620px; font-size: 13px; }
+  .hero-visual-wrap { max-width: 670px; }
+  .portfolio-intro-strip { grid-template-columns: repeat(2,1fr); }
+  .portfolio-intro-strip > div, .portfolio-intro-strip > div:first-child, .portfolio-intro-strip > div:last-child { padding: 18px 20px; border-bottom: 1px solid #d1d3c8; }
+  .portfolio-intro-strip > div:nth-child(2) { border-right: 0; }
+  .portfolio-intro-strip > div:nth-child(3), .portfolio-intro-strip > div:nth-child(4) { border-bottom: 0; }
+  .section { padding: 65px 0; }
+  .section-layout { grid-template-columns: 1fr; gap: 25px; }
+  .section-aside { display: grid; grid-template-columns: auto 24px minmax(0,1fr); align-items: center; gap: 12px; padding: 0; }
+  .aside-rule { margin: 0; width: 24px; }
+  .section-aside p { font-size: 13px; }
+  .section-heading-row { grid-template-columns: 1fr; gap: 20px; margin-bottom: 28px; }
+  .section-main h2, .section-heading-row h2 { font-size: clamp(36px, 7.4vw, 50px); }
+  .project-feature-body { grid-template-columns: 1fr; }
+  .project-feature-side { border-left: 0; border-top: 1px solid #d4d7cc; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .project-note-line { padding: 17px 14px; border-bottom: 0; border-right: 1px solid #d4d7cc; }
+  .project-note-line:last-child { border-right: 0; }
+  .project-note-line strong { font-size: 11px; }
+  .project-row { grid-template-columns: 29px minmax(0,1fr); }
+  .project-row-aside { grid-column: 2; flex-direction: row; align-items: center; flex-wrap: wrap; }
+  .thinking-sequence { grid-template-columns: 1fr; border-bottom: 0; margin-bottom: 42px; }
+  .thinking-sequence article { display: grid; grid-template-columns: 35px minmax(0,1fr); gap: 5px 14px; margin: 0; padding: 15px 0; border-bottom: 1px solid var(--line); border-right: 0; }
+  .thinking-sequence article > span { grid-row: span 2; }
+  .thinking-sequence h3 { margin: 0; }
+  .thinking-sequence p { grid-column: 2; }
+  .cad-section-intro { display: block; }
+  .cad-section-intro > p { margin-top: 13px; }
+  .cad-explorer { grid-template-columns: 1fr; }
+  .cad-model-list { border-left: 1px solid var(--line); border-right: 1px solid var(--line); }
+  .cad-model-list .cad-list-kicker { padding: 14px; }
+  .cad-model-option { padding-inline: 14px; }
+  .cad-list-note { margin: 0; padding: 17px 14px; }
+  .cad-viewer-stage { min-height: 320px; height: 360px; }
+  .cad-reasoning-panel { grid-template-columns: 55px minmax(0,1fr); gap: 18px; }
+  .story-item summary { grid-template-columns: 31px minmax(0,1fr) 24px; gap: 12px; min-height: 83px; }
+  .story-body { padding: 0 0 25px 43px; }
+  .architecture-intro-grid { grid-template-columns: 1fr; gap: 15px; }
+  .mrii-specimen-grid { grid-template-columns: 1fr; gap: 23px; }
+  .mrii-specimen { display: grid; grid-template-columns: minmax(115px,.45fr) minmax(0,1fr); gap: 10px 18px; }
+  .mrii-specimen > span { grid-column: 1/-1; }
+  .mrii-specimen h3 { margin: 0; }
+  .mrii-specimen p { margin: 0; }
+  .mrii-video-block { grid-template-columns: 1fr; gap: 18px; }
+  .patent-line { grid-template-columns: 1fr; gap: 12px; }
+  .research-paper-header { flex-direction: column; align-items: flex-start; }
+  .research-paper-columns { grid-template-columns: 1fr; }
+  .research-paper-viewer iframe { height: 390px; }
+  .research-workstreams { grid-template-columns: 1fr; gap: 10px; }
+  .recognition-list article, .recognition-feature { grid-template-columns: 1fr !important; gap: 8px; }
+  .evidence-heading { grid-template-columns: 1fr; gap: 12px; margin-top: 38px; }
+  .evidence-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 17px 12px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 35px; padding-bottom: 46px; }
+  .contact-actions { padding: 0; }
+  .site-footer { padding: 20px 0; flex-wrap: wrap; justify-content: flex-start; }
+  .site-footer > span { flex-basis: calc(50% - 12px); }
+}
+@media (max-width: 460px) {
+  .page-shell { width: calc(100% - 30px); }
+  .portfolio-brand-text { font-size: 9px; }
+  .portfolio-brand-text small { font-size: 7px; }
+  .hero h1 { font-size: 43px; }
+  .hero-bottom { flex-direction: column; gap: 7px; line-height: 1.6; }
+  .project-feature-top { flex-direction: column; align-items: flex-start; }
+  .project-feature-copy { padding: 22px 18px; }
+  .project-feature-side { grid-template-columns: 1fr; }
+  .project-note-line { border-right: 0; border-bottom: 1px solid #d4d7cc; }
+  .project-note-line:last-child { border-bottom: 0; }
+  .torque-equation { padding: 16px 12px; flex-wrap: wrap; }
+  .torque-equation span { font-size: 16px; }
+  .mrii-specimen { grid-template-columns: 1fr; }
+  .research-paper-viewer iframe { height: 320px; }
+  .evidence-grid { grid-template-columns: 1fr 1fr; }
+  .site-footer > span { flex-basis: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Context footage inside the Tirare case study */
+.work-context-feature { display: grid; grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); gap: 30px; align-items: center; margin: 0 0 10px; padding: 24px 0 30px; border-bottom: 1px solid var(--line); }
+.work-context-copy h3 { max-width: 360px; margin: 0; font-size: clamp(21px,2.5vw,30px); line-height: 1.13; letter-spacing: -.045em; font-weight: 550; }
+.work-context-copy > p:not(.eyebrow) { max-width: 400px; margin: 12px 0 0; color: #647066; font-size: 11px; line-height: 1.8; }
+.work-context-video video { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; background: #202821; }
+.work-context-video small { display: block; margin-top: 7px; color: #7f897e; font-size: 9px; }
+.evidence-tile.has-evidence .evidence-placeholder { display: none; }
+@media (max-width: 800px) { .work-context-feature { grid-template-columns: 1fr; gap: 18px; } }
+</style></head><body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header portfolio-header"><a href="#top" class="portfolio-brand"><span class="portfolio-monogram">AM<span>.</span></span><span class="portfolio-brand-text">ANURAG MISHRA<small>WORK / RESEARCH / NOTES</small></span></a><button class="mobile-menu-button" id="menuToggle" aria-expanded="false" aria-label="Open navigation">☰</button><nav class="desktop-nav portfolio-nav" id="siteNav"><a href="#work">Work</a><a href="#process">How I think</a><a href="#stories">Stories</a><a href="#research">Research</a><a href="#recognition">Recognition</a><a href="#about">About</a><a class="nav-contact" href="#contact">Contact ↗</a></nav></header>
+<main id="main">
+<section class="hero section-dark portfolio-hero" id="top"><div class="hero-grid" aria-hidden="true"></div><div class="hero-content page-shell portfolio-hero-content"><div class="hero-copy"><p class="eyebrow light-eyebrow"><span class="eyebrow-line"></span> ANURAG MISHRA / PERSONAL WORK ARCHIVE</p><h1>Build something.<br>Find where it fails.<br><em>Understand why.</em></h1><p class="hero-deck">I’m a student in India working across mechanical design, mobility, robotics and research. This site records the projects I’ve worked on, the decisions that changed them, and the questions I still need to answer.</p><div class="hero-actions"><a class="button button-light" href="#work">Explore the work ↘</a><a class="text-link text-link-light" href="#stories">Read the stories ↓</a></div></div><div class="hero-visual-wrap"><div class="portfolio-hero-art"><div class="art-topline"><span><i></i> CURRENT WORK / TIRARE</span><span>FIG. 01</span></div><svg viewBox="0 0 720 390" class="portfolio-trike-svg" role="img" aria-label="Engineering line drawing of a cargo tricycle"><defs><pattern id="previewGrid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" fill="none" stroke="currentColor" stroke-width=".6" opacity=".18"/></pattern></defs><rect width="720" height="390" fill="url(#previewGrid)"/><g fill="none" stroke="#a8b8ac" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="164" cy="282" r="63"/><circle cx="164" cy="282" r="51"/><circle cx="535" cy="282" r="63"/><circle cx="535" cy="282" r="51"/><path d="M164 282 L229 222 L376 222 L431 282 L535 282 M229 222 V155 H421 V222 M229 155 L255 126 H395 L421 155 M255 126 V102 H395 V126 M256 222 L287 282 L376 282 L410 245 M296 282 L310 311 H388 M420 222 L476 249 H535 M534 249 L567 180 H603 M567 180 L584 155 H620 M573 183 L589 239"/><circle cx="310" cy="311" r="27"/><path d="M310 311 L333 288 M310 311 L288 291 M310 311 L332 330 M310 311 L288 331"/></g><g fill="none" stroke="#91b7ff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><rect x="349" y="190" width="65" height="42" rx="4"/><path d="M349 211 H331 M414 211 H433 M363 199 V222 M377 199 V222 M391 199 V222 M382 233 V250" stroke-dasharray="none"/><path d="M412 190 L474 135 H575" stroke-width="1.1"/><circle cx="412" cy="190" r="4" fill="#91b7ff"/></g><g fill="#d7e2d9" font-family="Arial,sans-serif" font-size="10" letter-spacing="1.6"><text x="480" y="123">ASSIST INTERFACE</text><text x="480" y="146" opacity=".6">schematic location</text><text x="70" y="365" opacity=".7">EXISTING WORK VEHICLE</text><text x="490" y="350" opacity=".45">CONCEPT VIEW</text></g><path d="M48 345H664" stroke="#7f9383" opacity=".5"/></svg><div class="art-bottomline"><span>MECHANICAL DESIGN / CAD / RESEARCH</span><span>SCHEMATIC — NOT FOR FABRICATION</span></div></div><p class="hero-visual-caption">Current focus: Tirare and the Mechanical Rider Intent Interface.</p></div></div><div class="hero-bottom page-shell"><span>MECHANICAL DESIGN / RESEARCH / TEAM PROJECTS</span><span class="scroll-cue">A RECORD OF WORK, NOT A FINISHED STORY ↓</span></div></section>
+<section class="portfolio-intro-strip"><div><span class="intro-strip-kicker">SELECTED WORK</span><strong>Tirare / MRII</strong><small>Physical subsystem demonstrated</small></div><div><span class="intro-strip-kicker">RECOGNITION</span><strong>IIIT Delhi E-Pitch Café</strong><small>Winner · Proof-of-Concept track</small></div><div><span class="intro-strip-kicker">PROTOTYPE SUPPORT</span><strong>₹1,00,000</strong><small>Grant support</small></div><div><span class="intro-strip-kicker">RESEARCH</span><strong>IRIS / ETSD0071</strong><small>Submitted for evaluation</small></div></section>
+<section class="section section-paper" id="work"><div class="page-shell section-layout"><aside class="section-aside"><span class="section-number">01 / WORK</span><span class="aside-rule"></span><p>Projects first.<br>Claims second.</p></aside><div class="section-main"><p class="eyebrow">SELECTED PROJECTS</p><h2>Things I’ve tried to<br><em>understand by building.</em></h2><p class="section-lead">I like work where an idea has to meet constraints: a mechanism that must fit an existing vehicle, a car shaped by competition rules, or a research question that needs a measurement plan rather than a confident-sounding answer.</p><article class="project-feature"><div class="project-feature-top"><span>01 / MECHANICAL ENGINEERING · ONGOING</span><span class="project-status"><i></i> PROTOTYPE STAGE</span></div><div class="project-feature-body"><div class="project-feature-copy"><h3>Tirare</h3><p class="project-subtitle">Electrification without replacement.</p><p>A retrofit approach to electric assistance for the cargo tricycles people already use to earn a living. The starting constraint is simple: a new vehicle is not a practical answer for every operator, and losing a day’s work has a cost.</p><p class="project-role"><strong>My work:</strong> mechanical architecture, CAD, early drivetrain concepts, MRII development, technical documentation, research and validation planning.</p><p><a class="text-link-dark" href="https://tirare-webpage.github.io/" target="_blank" rel="noreferrer">Tirare project website ↗</a></p></div><div class="project-feature-side"><div class="project-note-line"><span>RECOGNITION</span><strong>Winner, IIIT Delhi E-Pitch Café</strong><p>Proof-of-Concept track; one of 17 selected teams from 300+ applicants.</p></div><div class="project-note-line"><span>SUPPORT</span><strong>₹1,00,000 prototype grant</strong><p>Soft-incubation support through CiPD, IIIT Delhi.</p></div><div class="project-note-line"><span>INTELLECTUAL PROPERTY</span><strong>Provisional application filed</strong><p>India · Application no. 202611118183. Not a granted patent.</p></div></div></div></article><div class="work-context-feature"><div class="work-context-copy"><p class="eyebrow">THE WORK THAT MOTIVATED THE PROJECT</p><h3>Before a mechanism, there was a person doing the work.</h3><p>This contextual clip gives a glimpse of the labour behind the engineering question. It is not a representative survey; it is included for context, not to turn someone’s working day into a spectacle.</p></div><div class="work-context-video"><video controls preload="metadata" playsinline aria-label="Contextual footage of a working rickshaw or cargo-tricycle operator"><source src="https://tirare-webpage.github.io/videos/worker-reality.mp4" type="video/mp4"></video><small>Contextual footage · not a measured study.</small></div></div><article class="project-row"><div class="project-row-index">02</div><div class="project-row-main"><p class="eyebrow">MECHANICAL SYSTEM / PHYSICAL PROOF OF CONCEPT</p><h3>MRII — Mechanical Rider Intent Interface</h3><p>A compliant mechanical interface intended to estimate rider-applied torque from relative angular displacement, while a downstream overrunning element is intended to limit actuator influence on the rider-input measurement.</p><p class="project-status-text">Built and demonstrated as a physical subsystem. Full cargo-tricycle integration and vehicle-level field performance remain to be validated.</p></div><div class="project-row-aside"><span>CORE MECHANISM</span><a href="#architecture">Explore mechanism ↗</a></div></article><article class="project-row"><div class="project-row-index">03</div><div class="project-row-main"><p class="eyebrow">ENGINEERING / TEAM LEADERSHIP</p><h3>F1 in Schools · Team Seraphis</h3><p>Team leader and engineer on a car model developed over roughly six months under dense competition regulations and design constraints. The team qualified for the F1 in Schools National Finals.</p><p class="project-status-text">A team result, supported by the model, design process and qualification records.</p></div><div class="project-row-aside"><span>AERODYNAMIC DESIGN</span><a href="#stories">Read what happened ↗</a></div></article><article class="project-row project-row-last"><div class="project-row-index">04</div><div class="project-row-main"><p class="eyebrow">ROBOTICS / COMPETITIONS</p><h3>Robotics and autonomous systems</h3><p>Work connected to WRO Future Engineers and the Robotics for Good Youth Challenge India 2025. Each programme has its own result and evidence, rather than one vague combined “robotics achievement”.</p></div><div class="project-row-aside"><span>ROBOTICS</span><a href="#recognition">See evidence slots ↗</a></div></article></div></div></section>
+<section class="section section-white" id="process"><div class="page-shell"><div class="section-heading-row"><div><span class="section-number">02 / HOW I THINK</span><h2>Every architecture<br><em>solves a different problem.</em></h2></div><p class="section-intro">These four CAD stages document a change in the engineering question—from power delivery to the conditions that make a retrofit useful.</p></div><div class="thinking-sequence"><article><span>01</span><h3>Observe</h3><p>Start with the vehicle, the work it already does, and the constraints that cannot be ignored.</p></article><article><span>02</span><h3>Set constraints</h3><p>Write down what must stay: the existing vehicle, manual rideability, serviceability and realistic installation.</p></article><article><span>03</span><h3>Model</h3><p>Use CAD to expose the power path, space conflicts, mounting assumptions and interactions.</p></article><article><span>04</span><h3>Reject or revise</h3><p>When an architecture fails an important constraint, change it. Time already spent is not evidence that a design is right.</p></article><article><span>05</span><h3>Define the test</h3><p>Separate what a drawing suggests, what a model calculates, what a prototype demonstrates and what a field trial would prove.</p></article></div><div class="cad-section-intro"><div><p class="eyebrow">DESIGN EVOLUTION / FOUR CAD VIEWS</p><h3>Follow the constraint, not just the shape.</h3></div><p>Choose a stage to read the reasoning behind it. Add reviewed, public-safe GLB exports to activate the interactive viewer.</p></div><div class="cad-explorer"><div class="cad-viewer-column"><div class="cad-viewer-topline"><span id="cadTitle">Model 01 · Reality</span><span class="cad-status"><i class="status-dot status-missing"></i>MODEL EXPORT PENDING</span></div><div class="cad-viewer-stage"><div class="cad-empty-state"><div class="cad-placeholder-mark">◇<span></span></div><h3>Public model export pending</h3><p>The interactive viewer will show the real CAD here after the reviewed GLB is added. No substitute geometry is used.</p><code>public/models/trike-cad-01.glb</code></div></div><div class="cad-viewer-controls"><span>Drag to orbit · scroll or pinch to zoom</span><div class="cad-tool-buttons"><button disabled>↻ Reset</button><button disabled>↗ Expand</button></div></div></div><div class="cad-model-list"><p class="cad-list-kicker">DESIGN ITERATIONS</p><button class="cad-model-option is-selected" data-cad="0"><span class="cad-model-index">01</span><span class="cad-model-label">Reality<small>Start with the vehicle that exists</small></span><span class="cad-model-arrow">↗</span></button><button class="cad-model-option" data-cad="1"><span class="cad-model-index">02</span><span class="cad-model-label">First attempt<small>Power delivery came first</small></span><span class="cad-model-arrow">↗</span></button><button class="cad-model-option" data-cad="2"><span class="cad-model-index">03</span><span class="cad-model-label">Constraint collision<small>Design meets field conditions</small></span><span class="cad-model-arrow">↗</span></button><button class="cad-model-option" data-cad="3"><span class="cad-model-index">04</span><span class="cad-model-label">Current platform<small>A revised direction to test</small></span><span class="cad-model-arrow">↗</span></button><div class="cad-list-note"><span class="small-rule"></span><p>The CAD explains design intent. Safe operation and vehicle-level performance still need physical validation.</p></div></div></div><article class="cad-reasoning-panel" aria-live="polite"><div class="cad-reasoning-number" id="cadNumber">01</div><div class="cad-reasoning-content"><p class="eyebrow">WHY THIS MODEL EXISTS</p><h3 id="cadReasonTitle">The existing tricycle is the baseline.</h3><p id="cadReason">The project began with a vehicle already carrying goods and earning income. Its frame, rear axle, pedal and chain, brakes, repair habits and available mounting space are constraints to design around—not things a retrofit can casually discard.</p><blockquote id="cadQuestion">What can be added without asking the operator to replace a working asset?</blockquote></div></article></div></section>
+<section class="section section-paper" id="stories"><div class="page-shell section-layout"><aside class="section-aside"><span class="section-number">03 / STORIES</span><span class="aside-rule"></span><p>Work has a<br>history.</p></aside><div class="section-main"><p class="eyebrow">THE PART THAT DOESN’T FIT IN A CERTIFICATE</p><h2>How the work<br><em>actually happened.</em></h2><p class="section-lead">These stories are not proof that every attempt went well. They are the context behind the work: what I started with, what broke, and why I chose a different route.</p><div class="stories-list"><details class="story-item"><summary><span class="story-number">01</span><span class="story-summary-copy"><small>TIRARE / ORIGIN</small><strong>A broken pedal changed the question</strong></span><span class="story-open">+</span></summary><div class="story-body"><p>I noticed a cargo tricycle still carrying goods even though its pedal was broken. The detail that stayed with me was that the vehicle was not working as intended, but the work continued. Repair costs money and time; replacement costs more. For someone who depends on the vehicle for income, stopping is not an abstract engineering inconvenience.</p><p>That changed my question. I stopped thinking only about how to build an electric vehicle and started asking whether the vehicle people already own could be made less physically demanding to use.</p><p class="story-footnote">This was an observation that shaped the project, not a formal survey or a claim about every operator.</p></div></details><details class="story-item"><summary><span class="story-number">02</span><span class="story-summary-copy"><small>THE MACHINE THAT CARRIED THE WORK</small><strong>The HP 240 G8</strong></span><span class="story-open">+</span></summary><div class="story-body"><p>Much of Tirare’s early CAD, architecture and documentation was done on an HP 240 G8 that I repaired myself after I was told it could not be fixed. It was far from a pristine workstation: the keyboard became unreliable, several keys were missing, and I continued with an external keyboard.</p><p>I had to arrange my own transport to the IIIT Delhi E-Pitch Café pitch. The laptop battery ran out in the middle of the presentation, so I kept explaining the work. The project was later selected as the Proof-of-Concept track winner and received ₹1 lakh in prototype support.</p><p>I don’t treat the laptop as a hardship prop. It’s part of the project’s record: the machine on which early versions were drawn, written, reconsidered and rebuilt.</p><div class="story-media-slot"><span>PHOTO SLOT</span><strong>Add a photo of the original HP 240 G8 here</strong><small>public/stories/hp-240-g8.jpg</small></div></div></details><details class="story-item"><summary><span class="story-number">03</span><span class="story-summary-copy"><small>ENGINEERING / REVISION</small><strong>When 96 pages were not enough</strong></span><span class="story-open">+</span></summary><div class="story-body"><p>An early Tirare approach grew into a 96-page engineering proof-of-concept. The document contained a lot of work, but that did not make the architecture sound. I found a fundamental flaw in how the drivetrain interacted with the existing axle and pedal path.</p><p>I chose to stop defending that design and rebuild the approach around the actual mechanical constraints. It meant giving up work that had taken months, but keeping a flawed design because I had invested time in it would have been worse.</p><p>Effort is not validation. A drawing is not a test. The next version has to answer the specific question the previous one left unresolved.</p></div></details><details class="story-item"><summary><span class="story-number">04</span><span class="story-summary-copy"><small>F1 IN SCHOOLS / A SECOND ROUTE</small><strong>Finding another way to Nationals</strong></span><span class="story-open">+</span></summary><div class="story-body"><p>My first F1 in Schools team attempt fell through when the team did not show up. I contacted Shiv Nadar School directly and asked whether another opportunity was possible. I was able to join the group that became Team Seraphis and eventually served as team leader and engineer.</p><p>The car model took around six months of design and iteration under a detailed rulebook and tight constraints. The team qualified for the National Finals. The result was shared, and the work involved learning to coordinate a team as well as keep the design moving under deadlines.</p><div class="story-media-slot"><span>PHOTO SLOT</span><strong>Add the car model and National Finals evidence</strong><small>public/stories/f1-seraphis/</small></div></div></details><details class="story-item"><summary><span class="story-number">05</span><span class="story-summary-copy"><small>WRITING / PERSONAL ESSAY</small><strong>The art of not ignoring</strong></span><span class="story-open">+</span></summary><div class="story-body"><p>I wrote about a pigeon that came to sit on my balcony and one day was visibly unwell. I was frightened of handling it and had a major Physics exam the next day. I called for help, eventually found an animal hospital willing to advise me, and spent hours trying to get the bird safely into a bag for the trip.</p><p>The essay is about the moment when noticing something becomes a decision to respond. I do not list it as an achievement. It is a personal piece of writing about uncertainty, responsibility and choosing to try while still afraid.</p><p class="story-footnote">This is writing, not a credential.</p></div></details></div></div></div></section>
+<section class="section section-dark portfolio-architecture" id="architecture"><div class="page-shell section-layout"><aside class="section-aside section-aside-light"><span class="section-number">04 / MRII</span><span class="aside-rule"></span><p>Mechanism<br>before claim.</p></aside><div class="section-main"><p class="eyebrow light-eyebrow">MECHANICAL RIDER INTENT INTERFACE</p><h2>A rider-input signal<br><em>with a defined load path.</em></h2><div class="architecture-intro-grid"><p>MRII investigates a mechanical interface for estimating human-applied effort in a human-plus-powered drivetrain. The design combines a compliant torsional coupling, whose relative angular displacement is sensed, with a downstream overrunning element intended to limit powered torque from influencing the rider-input measurement.</p><p>The physical MRII subsystem has been built and demonstrated. The complete cargo-tricycle retrofit has not yet been fully integrated and field-validated. The difference matters—and it belongs on the same page as the mechanism.</p></div><div class="torque-equation"><span>Human torque</span><b>+</b><span>Motor torque</span><b>=</b><span>Axle torque</span></div><div class="mrii-specimen-grid"><div class="mrii-specimen"><span>01 / MECHANICAL INTERFACE</span><h3>Compliance gives the signal a physical meaning.</h3><p>Human torque deforms the compliant member. Relative angular displacement between input and output members is the torque-related measurand.</p></div><div class="mrii-specimen"><span>02 / ANGLE SENSING</span><h3>Measure the relative rotation.</h3><p>The documented prototype configuration uses an AS5047P magnetic angle sensor. The angle reading is not, by itself, proof of a calibrated torque output.</p></div><div class="mrii-specimen"><span>03 / TORQUE ISOLATION</span><h3>Keep powered torque from corrupting rider input.</h3><p>A downstream overrunning element is intended to manage reverse-side torque influence. Its effectiveness needs matched-condition testing with clutch state verified.</p></div></div><div class="mrii-video-block"><div><p class="eyebrow light-eyebrow">TECHNICAL ANIMATION</p><h3>MRII: intended mechanism and torque path</h3><p>The animation explains the architecture. It is not evidence of a full-vehicle field trial.</p></div><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/TURjNSFJ2PE?rel=0&amp;modestbranding=1" title="MRII mechanism and technical explanation" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div><div class="patent-line"><div><span>INDIA / PROVISIONAL APPLICATION FILED</span><strong>202611118183</strong></div><p>Filed 2 September 2026 according to the project record. Provisional application, not a granted patent.</p></div></div></div></section>
+<section class="section section-white" id="research"><div class="page-shell section-layout"><aside class="section-aside"><span class="section-number">05 / RESEARCH</span><span class="aside-rule"></span><p>Analysis is not<br>the same as proof.</p></aside><div class="section-main"><p class="eyebrow">IRIS NATIONAL FAIR 2026–27 / ENGINEERING MECHANICS</p><h2>A research question<br><em>that can be tested.</em></h2><div class="research-paper-header"><div><p class="research-paper-label">SUBMITTED PROJECT / ETSD0071</p><h3>Quantitative Assessment of a Compliant Rider-Input Interface for Torque-Assisted Mobility</h3></div><span class="research-status">SUBMITTED FOR EVALUATION</span></div><div class="research-paper-columns"><div><h4>Question</h4><p>Can a compliant rider-input interface provide a useful torque-related angular signal while limiting actuator-induced apparent input in a human-plus-powered drivetrain?</p><h4>Work</h4><p>The paper and synopsis define the interface measurand and torque reference planes, analyse torque–angle records, examine matched-condition actuator-isolation data, compare flexure candidates, and identify the experiments needed for physical confirmation.</p><h4>Current boundary</h4><p>The numerical values in the current analysis must be distinguished from independently verified physical measurements. Traceable calibration and synchronized tests on a frozen assembly remain validation tasks.</p></div><div class="research-paper-viewer"><div class="document-viewer-heading"><span>▤</span><span>RESEARCH PAPER / DRIVE PREVIEW</span><a href="https://drive.google.com/file/d/1XBd-PEDUR0sacBVPBr6hy2ZznNF6v-A9/view?usp=sharing" target="_blank" rel="noreferrer">↗</a></div><iframe src="https://drive.google.com/file/d/1XBd-PEDUR0sacBVPBr6hy2ZznNF6v-A9/preview" title="MRII research paper preview" loading="lazy" allow="autoplay" referrerpolicy="strict-origin-when-cross-origin"></iframe><p>If the preview is blocked by Drive permissions, use the open-paper icon above. The file must have link-view access for external visitors.</p></div></div><div class="research-workstreams"><span>RELATED WORKSTREAMS</span><p>Measurement methodology · vehicle load-envelope calculations · flexure geometry and material assumptions · model comparisons · prior-art analysis. Supporting workstreams are not separate publications unless a publication record exists.</p></div></div></div></section>
+<section class="section section-paper" id="recognition"><div class="page-shell section-layout"><aside class="section-aside"><span class="section-number">06 / RECOGNITION</span><span class="aside-rule"></span><p>Evidence where<br>it belongs.</p></aside><div class="section-main"><p class="eyebrow">AWARDS, SELECTIONS AND ROLES</p><h2>Keep the record<br><em>specific.</em></h2><div class="recognition-list"><article class="recognition-feature"><div class="recognition-feature-label">WRITING / INTERNATIONAL COMPETITION</div><div><h3>Bronze Medal · Queen’s Commonwealth Essay Competition</h3><p>The 2025 edition received 53,434 entries from 54 Commonwealth countries. The medal is the result; the number gives context to the competition’s scale, not an exact rank.</p><a href="https://drive.google.com/file/d/1s2D5yjWjhejEhsmDsDqaNVIgs6ERCqRE/view?usp=sharing" target="_blank" rel="noreferrer" class="text-link-dark">View Bronze Medal Certificate ↗</a></div></article><article><span>ENGINEERING / TEAM</span><div><h3>F1 in Schools · National Finals</h3><p>Team Seraphis · Team leader and engineer.</p></div></article><article><span>ROBOTICS</span><div><h3>WRO Future Engineers</h3><p>National finalist.</p></div></article><article><span>ROBOTICS / 2025</span><div><h3>Robotics for Good Youth Challenge India</h3><p>Selected for the national-level stage in 2025.</p></div></article><article><span>LEADERSHIP</span><div><h3>Student Innovation Council · Ambience Public School</h3><p>Head of the council.</p></div></article><article><span>CLIMATE COMMUNICATION</span><div><h3>Climate Cardinals</h3><p>Delhi State Lead.</p></div></article><article><span>INVESTMENT SIMULATION</span><div><h3>Wharton Global High School Investment Competition</h3><p>The team reported a simulated competition-portfolio gain above $100,000. This was not personal cash earnings.</p></div></article><article><span>FOUNDER / PITCH SELECTION</span><div><h3>UPES Future Founders Challenge 2026</h3><p>Selected to pitch for a ₹1.5 lakh grand prize. This is a selection to pitch, not a claim that the prize was won.</p></div></article><article><span>TECHNICAL CREDENTIAL</span><div><h3>GitHub Foundations Badge</h3><p>Credential in GitHub fundamentals.</p></div></article><article><span>PODCAST / INVITATION</span><div><h3>Wharton Global Youth Program</h3><p>Invited to contribute to a podcast and recorded remotely.</p></div></article><article><span>DESIGN / INVITATION</span><div><h3>International space-settlement design pathway</h3><p>Invited into an international pathway; I did not proceed to full participation.</p></div></article></div><div class="evidence-heading"><div><p class="eyebrow">DOCUMENTS / ADD YOUR FILES</p><h3>Certificates and records</h3></div><p>The live site has empty evidence slots for scans or screenshots. Only files placed in the evidence folder appear; nothing is fabricated to fill the gaps.</p></div><div class="evidence-grid"><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">IIIT Delhi · E-Pitch Café</span><span class="evidence-detail">Winner / grant confirmation</span><code>iiitd-grant.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">Queen’s Commonwealth Essay Competition</span><span class="evidence-detail">Bronze Medal certificate</span><code>qcec-bronze.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">F1 in Schools · Seraphis</span><span class="evidence-detail">National Finals qualification</span><code>f1-nationals.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">WRO Future Engineers</span><span class="evidence-detail">National final / selection record</span><code>wro-future-engineers.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">Robotics for Good · India 2025</span><span class="evidence-detail">National-stage selection record</span><code>robotics-for-good.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">IRIS National Fair · ETSD0071</span><span class="evidence-detail">Submission confirmation</span><code>iris-submission.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">GitHub Foundations</span><span class="evidence-detail">Credential / badge</span><code>github-foundations.jpg</code></div><div class="evidence-tile"><div class="evidence-thumbnail"><div class="evidence-placeholder">▤<span>EVIDENCE SLOT</span></div></div><span class="evidence-label">Leadership roles</span><span class="evidence-detail">Student council / Climate Cardinals</span><code>leadership.jpg</code></div></div></div></div></section>
+<section class="section section-white" id="about"><div class="page-shell section-layout"><aside class="section-aside"><span class="section-number">07 / ABOUT</span><span class="aside-rule"></span><p>Still<br>learning.</p></aside><div class="section-main about-main"><p class="eyebrow">ANURAG MISHRA / AMBIENCE PUBLIC SCHOOL</p><h2>I don’t expect the first<br><em>answer to be right.</em></h2><p class="about-paragraph">My work crosses mechanical design, mobility, research, robotics and writing. I have learned a lot by trying to build before I feel fully ready—and by finding out that a design, a plan or an assumption does not survive contact with reality.</p><p class="about-paragraph">I’m interested in engineering that starts with people’s actual conditions, research that says exactly what its evidence supports, and projects where changing your mind is part of doing the work well.</p><p class="about-paragraph">This portfolio is a living record. It includes completed milestones, unfinished work and questions that still need answers. I’ll update it as the evidence changes.</p></div></div></section>
+<section class="contact-section section-dark" id="contact"><div class="page-shell contact-inner"><div><p class="eyebrow light-eyebrow"><span class="eyebrow-line"></span> CONTACT</p><h2>Talk about the<br><em>work itself.</em></h2><p class="contact-deck">I’m glad to hear from engineers, researchers, builders and people who want to ask a careful question about one of these projects.</p></div><div class="contact-actions"><a class="contact-email" href="mailto:anuragfromtirare@gmail.com">anuragfromtirare@gmail.com ↗</a><a href="https://www.linkedin.com/in/anurag-mishra-b25733340/" target="_blank" rel="noreferrer" class="text-link text-link-light">LinkedIn profile ↗</a></div></div><footer class="site-footer page-shell"><a class="portfolio-brand portfolio-brand-footer" href="#top"><span class="portfolio-monogram">AM<span>.</span></span><span class="portfolio-brand-text">ANURAG MISHRA<small>WORK / RESEARCH / NOTES</small></span></a><span>Selected work, with context.</span><span>© 2026 Anurag Mishra</span></footer></section>
+</main>
+<script>
+const modelNotes = [
+  {title:"The existing tricycle is the baseline.", body:"The project began with a vehicle already carrying goods and earning income. Its frame, rear axle, pedal and chain, brakes, repair habits and available mounting space are constraints to design around—not things a retrofit can casually discard.", question:"What can be added without asking the operator to replace a working asset?"},
+  {title:"A working torque path can still be the wrong retrofit.", body:"The early architecture focused on torque transfer and electric assistance. CAD helped examine the power path, but added parts, fabrication demands, installation complexity and repairability mattered too.", question:"Does it transfer torque—and can it be fitted and maintained on the vehicles people already own?"},
+  {title:"The constraints had to be solved together.", body:"A candidate that looked workable in isolation could collide with the fixed rear axle, frame geometry, chain line or mounting space. Dust, shock loads, misalignment, overloading, maintenance variation and differences between tricycles made the problem more specific.", question:"What fails when a theoretical concept meets the actual vehicle and its operating conditions?"},
+  {title:"The current direction is shaped by retrofit reality.", body:"The revised platform prioritises reversible attachment, preservation of the original vehicle structure and manual operation, and the rider’s place in the propulsion system. CAD represents design intent, not proof of full-vehicle safety or performance.", question:"This is the candidate to validate—not a claim that the full retrofit is field-ready."}
+];
+document.querySelectorAll('[data-cad]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-cad]').forEach(b=>b.classList.remove('is-selected'));btn.classList.add('is-selected');const n=Number(btn.dataset.cad),m=modelNotes[n];document.getElementById('cadTitle').textContent=`Model 0${n+1} · ${btn.querySelector('.cad-model-label').childNodes[0].textContent.trim()}`;document.getElementById('cadNumber').textContent=`0${n+1}`;document.getElementById('cadReasonTitle').textContent=m.title;document.getElementById('cadReason').textContent=m.body;document.getElementById('cadQuestion').textContent=m.question;document.querySelector('.cad-empty-state code').textContent=`public/models/trike-cad-0${n+1}.glb`;}));
+const toggle=document.getElementById('menuToggle'), nav=document.getElementById('siteNav');toggle.addEventListener('click',()=>{const open=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',String(open));toggle.textContent=open?'×':'☰';});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';}));
+</script></body></html>
