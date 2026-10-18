@@ -66,10 +66,4 @@ The IRIS paper is embedded using the supplied Drive file ID. The source document
 - The pigeon rescue is a writing/story item only, not a credential or achievement.
 - Personal diary details, private family experiences and private correspondence are not reproduced by default.
 
-## Before publishing
 
-1. Add actual project photos, checked certificates and cleared CAD exports.
-2. Confirm the embedded research paper can be viewed by the intended audience.
-3. Verify competition status wording against the actual certificates/official notices.
-4. Review all CAD and media for intellectual-property and privacy risks.
-5. Test on mobile, keyboard-only navigation and at least one other browser.
