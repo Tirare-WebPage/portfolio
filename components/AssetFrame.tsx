@@ -21,7 +21,8 @@ type Props = {
 };
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-const withBasePath = (path: string) => path.startsWith("/") && basePath ? `${basePath}${path}` : path;
+const withBasePath = (path: string) =>
+  path.startsWith("/") && basePath ? `${basePath}${path}` : path;
 
 declare global {
   interface Window {
@@ -30,35 +31,58 @@ declare global {
 }
 
 function loadModelViewer(): Promise<void> {
-  if (typeof window === "undefined") return Promise.reject(new Error("Browser only"));
+  if (typeof window === "undefined") {
+    return Promise.reject(new Error("The 3D viewer is only available in the browser."));
+  }
   if (customElements.get("model-viewer")) return Promise.resolve();
   if (window.__portfolioModelViewerPromise) return window.__portfolioModelViewerPromise;
+
   window.__portfolioModelViewerPromise = new Promise<void>((resolve, reject) => {
+    const finish = () => {
+      customElements.whenDefined("model-viewer").then(() => resolve(), reject);
+    };
+    const fail = () => reject(new Error("The 3D viewer library could not be loaded."));
     const existing = document.querySelector<HTMLScriptElement>("script[data-portfolio-model-viewer]");
+
     if (existing) {
-      existing.addEventListener("load", () => resolve(), { once: true });
-      existing.addEventListener("error", () => reject(new Error("The 3D viewer could not load.")), { once: true });
+      existing.addEventListener("load", finish, { once: true });
+      existing.addEventListener("error", fail, { once: true });
+      // The script may already have loaded between the first check and this branch.
       if (customElements.get("model-viewer")) resolve();
       return;
     }
+
     const script = document.createElement("script");
     script.type = "module";
     script.src = "https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js";
     script.dataset.portfolioModelViewer = "true";
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("The 3D viewer could not load."));
+    script.addEventListener("load", finish, { once: true });
+    script.addEventListener("error", fail, { once: true });
     document.head.appendChild(script);
   });
+
   return window.__portfolioModelViewerPromise;
 }
 
-function MediaPlaceholder({ kind, title, description, src }: { kind: AssetKind; title: string; description?: string; src: string }) {
+function MediaPlaceholder({
+  kind,
+  title,
+  description,
+  src,
+}: {
+  kind: AssetKind;
+  title: string;
+  description?: string;
+  src: string;
+}) {
   const Icon = kind === "model" ? Rotate3D : kind === "video" ? Film : kind === "pdf" ? Box : FileImage;
   return (
     <div className="asset-placeholder">
       <span className="asset-placeholder-icon"><Icon size={23} strokeWidth={1.4} /></span>
       <div className="asset-placeholder-copy">
-        <span className="asset-placeholder-label">{kind === "model" ? "INTERACTIVE CAD SLOT" : kind === "video" ? "VIDEO SLOT" : kind === "pdf" ? "DOCUMENT SLOT" : "PHOTOGRAPH SLOT"}</span>
+        <span className="asset-placeholder-label">
+          {kind === "model" ? "INTERACTIVE CAD SLOT" : kind === "video" ? "VIDEO SLOT" : kind === "pdf" ? "DOCUMENT SLOT" : "PHOTOGRAPH SLOT"}
+        </span>
         <strong>{title}</strong>
         {description ? <p>{description}</p> : null}
         <code>{src}</code>
@@ -83,43 +107,30 @@ export default function AssetFrame({
   const [missing, setMissing] = useState(false);
   const [modelError, setModelError] = useState("");
   const modelHost = useRef<HTMLDivElement>(null);
-  const candidates = [src, ...(fallbackSrc ? [fallbackSrc] : [])];
+  const primaryUrl = withBasePath(src);
+  const fallbackUrl = fallbackSrc ? withBasePath(fallbackSrc) : "";
 
+  // Do not preflight public files with fetch(HEAD). Some static hosts and local
+  // development configurations answer HEAD differently from GET. Let the real
+  // image/video/model/PDF request determine whether the asset exists.
   useEffect(() => {
-    let cancelled = false;
-    setResolvedSrc("");
     setMissing(false);
     setModelError("");
+    setResolvedSrc(primaryUrl);
+  }, [primaryUrl, fallbackUrl, kind]);
 
-    const check = async () => {
-      for (const candidate of candidates) {
-        const url = withBasePath(candidate);
-        try {
-          const response = await fetch(url, { method: "HEAD", cache: "no-store" });
-          if (response.ok) {
-            if (!cancelled) setResolvedSrc(url);
-            return;
-          }
-        } catch {
-          // A cross-origin fallback can reject HEAD because of CORS. Try it directly;
-          // the media element below will report a genuine load failure.
-          if (/^https?:\/\//i.test(candidate)) {
-            if (!cancelled) setResolvedSrc(candidate);
-            return;
-          }
-        }
-      }
-      if (!cancelled) setMissing(true);
-    };
-
-    void check();
-    return () => { cancelled = true; };
-    // Candidate paths are static component props.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, fallbackSrc, kind]);
+  const handleAssetError = () => {
+    if (fallbackUrl && resolvedSrc !== fallbackUrl) {
+      setResolvedSrc(fallbackUrl);
+      setModelError("");
+      return;
+    }
+    setMissing(true);
+    setResolvedSrc("");
+  };
 
   useEffect(() => {
-    if (kind !== "model" || !resolvedSrc || !modelHost.current) return;
+    if (kind !== "model" || !resolvedSrc || !modelHost.current || missing) return;
     let cancelled = false;
     const host = modelHost.current;
     host.replaceChildren();
@@ -140,37 +151,81 @@ export default function AssetFrame({
         viewer.setAttribute("loading", "lazy");
         viewer.className = "asset-model-viewer";
         viewer.addEventListener("error", () => {
-          if (!cancelled) setModelError("This model could not be rendered. Check that the GLB file is complete and publicly accessible.");
+          if (!cancelled) {
+            if (fallbackUrl && resolvedSrc !== fallbackUrl) {
+              setResolvedSrc(fallbackUrl);
+              setModelError("");
+            } else {
+              setModelError("The model file was reached, but it could not be rendered. Check that it is a valid, complete GLB export.");
+            }
+          }
         }, { once: true });
         host.appendChild(viewer);
       })
       .catch(() => {
-        if (!cancelled) setModelError("The interactive 3D viewer could not be loaded. Check the internet connection or use a still render of the model.");
+        if (!cancelled) setModelError("The 3D viewer library could not load. Check your internet connection and allow unpkg.com.");
       });
 
-    return () => { cancelled = true; host.replaceChildren(); };
-  }, [kind, resolvedSrc, alt, title]);
+    return () => {
+      cancelled = true;
+      host.replaceChildren();
+    };
+  }, [kind, resolvedSrc, alt, title, missing, fallbackUrl]);
 
   const wrapperClass = `asset-frame asset-${aspect} ${className}`.trim();
   return (
     <div className={wrapperClass}>
       {missing ? <MediaPlaceholder kind={kind} title={title} description={description} src={src} /> : null}
-      {!missing && !resolvedSrc ? <div className="asset-loading" aria-label={`Checking for ${title}`}><span className="asset-loading-line" /><span>{title}</span></div> : null}
+      {!missing && !resolvedSrc ? (
+        <div className="asset-loading" aria-label={`Loading ${title}`}>
+          <span className="asset-loading-line" /><span>{title}</span>
+        </div>
+      ) : null}
       {!missing && resolvedSrc && kind === "image" ? (
-        <Image src={resolvedSrc} alt={alt || title} fill unoptimized sizes="(max-width: 760px) 100vw, 50vw" className={`asset-image fit-${fit}`} onError={() => setMissing(true)} />
+        <Image
+          src={resolvedSrc}
+          alt={alt || title}
+          fill
+          unoptimized
+          sizes="(max-width: 760px) 100vw, 50vw"
+          className={`asset-image fit-${fit}`}
+          onError={handleAssetError}
+        />
       ) : null}
       {!missing && resolvedSrc && kind === "video" ? (
-        <video src={resolvedSrc} controls={controls} playsInline preload="metadata" muted className="asset-video" onError={() => setMissing(true)} aria-label={title} />
+        <video
+          src={resolvedSrc}
+          controls={controls}
+          playsInline
+          preload="metadata"
+          muted
+          className="asset-video"
+          onError={handleAssetError}
+          aria-label={title}
+        />
       ) : null}
       {!missing && resolvedSrc && kind === "model" ? (
         <>
           <div className="asset-model-host" ref={modelHost} />
-          {modelError ? <div className="asset-model-error"><Rotate3D size={20}/><p>{modelError}</p><code>{src}</code></div> : null}
-          {!modelError ? <span className="asset-interaction-hint">DRAG TO ROTATE · SCROLL TO ZOOM</span> : null}
+          {modelError ? (
+            <div className="asset-model-error">
+              <Rotate3D size={20} />
+              <p>{modelError}</p>
+              <code>{resolvedSrc}</code>
+            </div>
+          ) : (
+            <span className="asset-interaction-hint">DRAG TO ROTATE · SCROLL TO ZOOM</span>
+          )}
         </>
       ) : null}
       {!missing && resolvedSrc && kind === "pdf" ? (
-        <iframe className="asset-pdf" src={resolvedSrc} title={title} loading="lazy" />
+        <iframe
+          className="asset-pdf"
+          src={resolvedSrc}
+          title={title}
+          loading="lazy"
+          onError={handleAssetError}
+        />
       ) : null}
     </div>
   );
