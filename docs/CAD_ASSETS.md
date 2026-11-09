@@ -1,12 +1,22 @@
-# Public-safe CAD exports
+# 3D model assets
 
-Add the four reviewed, public-safe `.glb` files here. The interactive viewer expects these exact names:
+The portfolio now reads models directly from `public/assets/cad/`, matching the structure of the Tirare pitch project. Do not put the models in `public/models/`; that legacy folder is no longer used.
 
-1. `trike-cad-01.glb` — Reality / reference cargo tricycle
-2. `trike-cad-02.glb` — First attempt / early power-delivery architecture
-3. `trike-cad-03.glb` — Constraint collision / revised after fit and drivetrain conflicts
-4. `trike-cad-04.glb` — Current platform / candidate architecture for further validation
+## Required / featured model paths
 
-Before committing a model to a public repository, inspect it for dimensions, hidden components, internal mechanisms, tolerances, or any detail that should remain undisclosed while the complete patent specification and IP strategy are being handled. Use simplified or rendered exports if necessary.
+| Website slot | File to add | Purpose |
+|---|---|---|
+| Hero MRII view | `public/assets/cad/mrii-interface-detail.glb` | MRII interface detail model |
+| Tirare current system | `public/assets/cad/current-platform.glb` | Current Tirare platform |
+| Design stage 01 | `public/assets/cad/reality.glb` | Reference cargo tricycle |
+| Design stage 02 | `public/assets/cad/first-attempt.glb` | First power-delivery attempt |
+| Design stage 03 | `public/assets/cad/constraint-collision.glb` | Constraint collision / revised concept |
+| Design stage 04 | `public/assets/cad/current-platform.glb` | Current platform |
+| Existing vehicle | `public/assets/cad/wooden-trike.glb` | Wooden cargo tricycle |
+| Comparison vehicle | `public/assets/cad/metal-trike.glb` | Steel-frame cargo tricycle |
 
-No CAD geometry is fabricated by the website. Missing files show a clear placeholder.
+All models are loaded from the local public paths above. The website shows an explicit labelled placeholder when a file has not yet been added; it does not substitute an unverified external model.
+
+## Before publishing
+
+Inspect every export for patent-sensitive dimensions, internal geometry, tolerances, materials, hidden components and details that should not be disclosed. A model viewer makes geometry inspectable by anyone; publish only approved, public-safe GLBs. CAD communicates design intent and is not proof of manufacturing readiness, safety or vehicle-level validation.

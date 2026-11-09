@@ -1,32 +1,19 @@
 # Deploy the portfolio to GitHub Pages
 
-This patch prepares the existing Next.js portfolio repository `Tirare-WebPage/portfolio` for GitHub Pages.
-The intended URL is **https://tirare-webpage.github.io/portfolio/**.
+This repository is configured to export a personal portfolio to **https://tirare-webpage.github.io/portfolio/**. Tirare is presented as Anurag's flagship project, while this remains the personal website.
 
-## Files to copy into the repository
+## Deploy
 
-Copy the files and folders in this patch into the root of the existing GitHub repository, preserving their relative paths and replacing the files that already exist:
+1. Open repository **Settings → Pages**.
+2. Under **Build and deployment**, choose **GitHub Actions**.
+3. Commit and push the complete updated project to the `main` branch.
+4. Open the **Actions** tab and inspect the Pages workflow.
+5. When build and deployment succeed, the site will be published at the URL above.
 
-- `.github/workflows/deploy.yml`
-- `next.config.ts`
-- `app/layout.tsx`
-- `app/page.tsx` (includes the LinkedIn icon fix and Queen’s Commonwealth certificate link)
-- `preview.html` (keeps the standalone preview in sync)
-- `components/EvidenceGallery.tsx`
-- `components/PortfolioCadExplorer.tsx`
+The workflow should build the Next.js `out/` directory with `GITHUB_PAGES=true` so the `/portfolio` base path is applied. Keep `package-lock.json` committed for `npm ci`.
 
-Do not delete the repository's existing `package-lock.json`; the workflow uses `npm ci`.
+## Add files
 
-## Turn on Pages
+Copy CAD and pitch media into `public/assets/cad/` and `public/assets/media/`. Add certificates and personal photographs at the exact paths listed in `docs/EVIDENCE_ASSETS.md` and `docs/STORY_ASSETS.md`. The website now references `public/assets/`; it does not use `public/models/`.
 
-1. Open https://github.com/Tirare-WebPage/portfolio/settings/pages
-2. Under **Build and deployment**, choose **GitHub Actions** as the source.
-3. Commit and push the changed files to the `main` branch. Adding `.github/workflows/deploy.yml` will trigger the build automatically.
-4. Open the **Actions** tab and select **Deploy portfolio to GitHub Pages**. Wait for the build and deployment jobs to show green check marks.
-5. The deployed page should be available at https://tirare-webpage.github.io/portfolio/ .
-
-The workflow builds Next.js's static `out/` directory and publishes it with GitHub Pages. It also configures `/portfolio` as the site's base path and prefixes the manually referenced files in `public/`. Local development remains rooted at `http://localhost:3000/`.
-
-## Troubleshooting
-
-If the workflow fails, open the failed run in **Actions**, expand the first red step, and use that error to diagnose the build. Pages will not publish until the workflow succeeds.
+GitHub Pages paths are case-sensitive. Preserve file names or update the matching path in `app/page.tsx`. Do not commit `.env` files, API keys, private documents, unredacted e-filing acknowledgements or patent-sensitive CAD.

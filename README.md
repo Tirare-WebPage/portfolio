@@ -1,69 +1,66 @@
 # Anurag Mishra — Personal Portfolio
 
-A personal work archive, separate from Tirare’s company website. It documents selected projects, the process behind the work, personal stories, research status, recognitions and supporting evidence.
+A long-form portfolio presenting Anurag Mishra and Tirare together while keeping the personal portfolio distinct from the company's product site. The site covers the Tirare mobility project, MRII mechanical architecture, design evolution, INSEF research, IIIT Delhi recognition, provisional-application filing record, other projects, personal work and selected achievements.
 
-## Preview
+## Development
 
-Open `preview.html` directly in a browser to inspect the layout and story flow without installing Node packages. The 3D models and Google Drive paper still need their online assets/permissions; use the Next.js app for the full interactive experience.
-
-## Run locally on Windows
-
-Install Node.js LTS first, then open PowerShell in this folder:
-
-```powershell
-npm.cmd install
-npm.cmd run dev
+```bash
+npm install
+npm run dev
 ```
 
-Open `http://localhost:3000`. Keep the terminal open while using the local website.
+Open `http://localhost:3000`. To create the static export configured for GitHub Pages:
 
-To create a static export for hosting, run:
-
-```powershell
-npm.cmd run build
+```bash
+npm run build
 ```
 
-Next.js exports the static site into `out/` using the current `next.config.ts` configuration. Preview the exported folder with a static server before publishing.
+The deployable export is written to `out/`. The canonical source is in `app/` and `components/`.
 
-## What is included
+## Page structure
 
-- Responsive portfolio homepage and navigation
-- Work sections for Tirare/MRII, F1 in Schools and robotics
-- A five-step process section explaining the design approach
-- Four-stage interactive CAD viewer with stage-specific design reasoning
-- Collapsible project stories: Tirare’s origin, the repaired laptop, the early design revision, the F1 second opportunity, and a personal essay about "the art of not ignoring"
-- MRII technical animation embed (the long physical-prototype video and founder-pitch video are not embedded)
-- IRIS research section with a Google Drive preview and external fallback
-- Recognition and certificate/evidence gallery with honest placeholders
-- Accessible nav, reduced-motion handling, contact links and metadata
+- Hero — Anurag's identity and featured MRII visual
+- Tirare — the cargo-tricycle retrofit problem, design intent, founder role and project media
+- MRII — mechanical interface, compliant coupling, sprag-clutch / overrunning architecture, physical prototype media and operating conditions
+- Design development — four visible CAD stages, reference vehicle models and supporting animations
+- Research — INSEF 2026–27 project and research approach
+- Milestones — IIIT Delhi E-Pitch Café recognition and provisional-application e-filing acknowledgement
+- Other work — F1 in Schools, robotics, Climate Cardinals, student leadership and writing
+- Personal record — pigeon rescue photographs and account
+- Recognition, About and Contact
 
-## Add the four CAD models
+All page sections are visible in the scroll flow. There are no accordion stories, hidden CAD panels, dropdowns or start/preview pages.
 
-See `docs/CAD_ASSETS.md`. Place reviewed, public-safe exports in `public/models/` with these names:
+## Original Tirare pitch assets
 
-- `trike-cad-01.glb`
-- `trike-cad-02.glb`
-- `trike-cad-03.glb`
-- `trike-cad-04.glb`
+Copy the source pitch project's `assets/cad/` and selected `assets/media/` files into this project's `public/assets/` directory:
 
-The viewer supports orbit, zoom, reset and fullscreen. It loads `<model-viewer>` from a CDN at runtime and therefore requires internet access to load the interactive viewer. Missing `.glb` files show placeholders. Review patent-sensitive geometry before publishing.
+- 3D models: `public/assets/cad/`
+- Videos and pitch photographs: `public/assets/media/`
 
-## Add certificates and evidence
+The `public/models/` directory is not used. The asset names and destinations are listed in `docs/PITCH_ASSET_MAP.md`, `docs/CAD_ASSETS.md` and `docs/STORY_ASSETS.md`.
 
-See `docs/EVIDENCE_ASSETS.md` for the exact filenames. Gallery items remain placeholders until a file is added. Redact private identifiers and contact details before adding any document image to a public site.
+## Personal photographs and evidence
 
-## Research paper
+See `docs/STORY_ASSETS.md` and `docs/EVIDENCE_ASSETS.md`. Priority files include:
 
-The IRIS paper is embedded using the supplied Drive file ID. The source document must have link-view permissions for visitors to see the embed. If it does not, use the external Drive control on that section or change the sharing setting yourself. The project is labelled submitted for evaluation, not published or peer-reviewed.
+- `public/profile/anurag-portrait.jpg`
+- `public/evidence/iiitd-award-receiving.jpg`
+- `public/evidence/iiitd-grant-certificate.jpg`
+- `public/evidence/patent-efiling-acknowledgement.pdf`
+- `public/stories/pigeon-rescue/01-balcony.jpg` through `04-aftercare.jpg`
+- `public/stories/tirare/mrii-bench-prototype.jpg`
 
-## Important editorial boundaries
+Missing assets appear as labelled image, video, PDF or 3D-model placeholders. The page does not invent personal photographs, certificates or prototype evidence.
 
-- MRII provisional application no. `202611118183` is a provisional filing, not a granted patent.
-- The MRII subsystem has been physically demonstrated; full cargo-tricycle integration and field performance remain to be validated.
-- QCEC wording is Bronze Medal; no international numerical rank is claimed.
-- F1 in Schools is described as a team National Finals qualification. The 1.2-second / 60-metre claim is omitted pending verification of its track and timing context.
-- Wharton competition gains are labelled as simulation results, not real money earned.
-- The pigeon rescue is a writing/story item only, not a credential or achievement.
-- Personal diary details, private family experiences and private correspondence are not reproduced by default.
+## Evidence and publication safeguards
 
+- The MRII physical subsystem has been built and demonstrated; complete vehicle integration and field performance remain to be validated.
+- The sprag-clutch / overrunning mechanism is part of the intended architecture. Its isolation behaviour must be demonstrated on the assembled system under matched test conditions.
+- CAD and animations communicate design intent; they do not prove safety, reliability or manufacturing readiness.
+- The Indian filing is described as a provisional application submitted on 2 October 2026, not a granted patent.
+- Redact personal and confidential information from certificates, acknowledgements and filings before publishing.
+- The pigeon rescue is a personal account, not a credential or quantified impact claim.
+- Wharton competition performance refers to a team simulation, not personal investment returns.
 
+Inspect every GLB for confidential geometry and patent-sensitive dimensions before publishing. Obtain permission before publishing recognisable photographs of other people.

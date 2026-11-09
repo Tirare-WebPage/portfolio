@@ -1,16 +1,14 @@
-# Certificate and evidence images
+# Certificates, filings and evidence documents
 
-Add only scans or screenshots that you are comfortable publishing. The certificate gallery looks for these exact filenames:
+Use only public-safe, genuine records. Redact addresses, phone numbers, signatures, private identifiers, payment references, access tokens and confidential technical information before adding documents to a public repository.
 
-- `iiitd-grant.jpg`
-- `qcec-bronze.jpg`
-- `f1-nationals.jpg`
-- `wro-future-engineers.jpg`
-- `robotics-for-good.jpg`
-- `iris-submission.jpg`
-- `github-foundations.jpg`
-- `leadership.jpg`
+| File to add | Website use |
+|---|---|
+| `public/evidence/iiitd-award-receiving.jpg` | IIIT Delhi E-Pitch Café photograph |
+| `public/evidence/iiitd-grant-certificate.jpg` | IIIT Delhi / CiPD certificate or grant record |
+| `public/evidence/patent-efiling-acknowledgement.pdf` | Redacted Indian provisional-application e-filing acknowledgement |
+| `public/evidence/queens-commonwealth-bronze.jpg` | Queen’s Commonwealth Essay Competition Bronze Medal certificate |
+| `public/evidence/f1-schools-national.jpg` | F1 in Schools National Finals evidence |
+| `public/evidence/wro-record.jpg` | WRO Future Engineers competition record |
 
-The gallery leaves a placeholder until the matching file exists, then lets visitors open the image at a larger size.
-
-Do not place private emails, addresses, signatures, student IDs, unredacted personal details, or documents that contain information you do not intend to publish. Crop or redact sensitive parts before adding an image. An IRIS submission confirmation indicates a submission; it is not a publication or award certificate.
+The patent section is deliberately labelled **provisional application submitted**, not patent granted. The current project record identifies a filing date of 2 October 2026. The application is not represented as granted or examined. Keep confidential technical disclosures out of the public acknowledgement.

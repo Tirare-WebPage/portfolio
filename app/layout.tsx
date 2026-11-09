@@ -4,21 +4,21 @@ import "./globals.css";
 const publicBasePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const metadata: Metadata = {
-  title: "Anurag Mishra — Work, Research & Notes",
+  title: "Anurag Mishra — Founder, Tirare | Mechanical Design & Research",
   description:
-    "A personal portfolio documenting Anurag Mishra’s work in mechanical design, Tirare, MRII, F1 in Schools, robotics, research and writing — including the stories and decisions behind the work.",
+    "Personal portfolio of Anurag Mishra: founder of Tirare and developer of MRII, a mechanical rider-intent interface for cargo-tricycle electric retrofits. Mechanical design, research, robotics, competitions and independent work.",
   applicationName: "Anurag Mishra Portfolio",
   openGraph: {
-    title: "Anurag Mishra — Work, Research & Notes",
+    title: "Anurag Mishra — Founder, Tirare | Mechanical Design & Research",
     description:
-      "Projects, research, and the stories behind the work. A record of what was built, what changed, and what still needs proving.",
+      "The work of Anurag Mishra: Tirare mobility, MRII mechanical interface research, design development, robotics, competitions and independent initiatives.",
     type: "website",
   },
   icons: { icon: `${publicBasePath}/favicon.svg` },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#19251e",
+  themeColor: "#171a17",
   width: "device-width",
   initialScale: 1,
 };
