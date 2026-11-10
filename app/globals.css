@@ -177,6 +177,13 @@ button { font: inherit; }
 .mrii-showcase { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(290px, .68fr); gap: clamp(30px, 5vw, 75px); align-items: center; }
 .mrii-model-frame { padding: 12px; background: #dadbd0; border: 1px solid #c3c8ba; }
 .mrii-model-frame .asset-frame { min-height: 430px; background: #dadbd0; }
+.mrii-video-panel { min-width: 0; }
+.mrii-video-topline { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 10px; color: #71873d; font: 8px var(--mono); letter-spacing: .12em; }
+.mrii-video-topline a { display: inline-flex; align-items: center; gap: 5px; color: #657b38; text-decoration: none; letter-spacing: .04em; white-space: nowrap; }
+.mrii-video-topline a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.mrii-video-embed { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; background: #101410; border: 1px solid #c3c8ba; }
+.mrii-video-embed iframe { position: absolute; inset: 0; display: block; width: 100%; height: 100%; border: 0; }
+.mrii-video-caption { margin: 10px 0 0; color: #7b8274; font: 8px/1.6 var(--mono); letter-spacing: .025em; }
 .mrii-showcase-copy { padding: 15px 0; }
 .data-label { color: #71873d; font: 8px var(--mono); letter-spacing: .13em; }
 .mrii-showcase-copy h3 { margin: 18px 0 14px; font: 400 clamp(35px, 4vw, 55px)/.98 var(--serif); letter-spacing: -.04em; }
