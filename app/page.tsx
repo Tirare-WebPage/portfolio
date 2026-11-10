@@ -292,9 +292,22 @@ export default function Home() {
               <div><Eyebrow>MECHANICAL RIDER-INTENT INTERFACE</Eyebrow><h2>MRII makes rider input<br/><em>measurable at the mechanism.</em></h2></div>
               <p>MRII is the mechanical interface being developed for Tirare's retrofit architecture. It is intended to derive a torque-related rider signal from relative angular displacement while limiting motor-side influence on the rider input.</p>
             </div>
-            <div className="mrii-showcase">
-              <div className="mrii-model-frame"><AssetFrame kind="model" src="/assets/cad/mrii-interface-detail.glb" title="MRII interface detail" description="Add assets/cad/mrii-interface-detail.glb from the original Tirare pitch assets." aspect="cinematic" /></div>
-              <div className="mrii-showcase-copy"><span className="data-label">FIG. 02 / INTERFACE DETAIL</span><h3>A mechanical signal, not a proxy from motor current.</h3><p>The interface separates the rider-side input member from the downstream drive path through a compliant torsional element. The angular difference is measured across the coupling.</p><div className="equation-card"><span>INTENDED MEASURAND</span><strong>Δθ = θ<sub>input</sub> − θ<sub>output</sub></strong><small>Relative angular displacement across the compliant coupling</small></div></div>
+            <div className="mrii-showcase mrii-video-showcase">
+              <div className="mrii-video-panel">
+                <div className="mrii-video-topline"><span>MAIN VIDEO / MRII MECHANISM</span><a href="https://youtu.be/TURjNSFJ2PE" target="_blank" rel="noreferrer">Open on YouTube <ArrowUpRight size={13} /></a></div>
+                <div className="mrii-video-embed">
+                  <iframe
+                    src="https://www.youtube-nocookie.com/embed/TURjNSFJ2PE?rel=0&modestbranding=1"
+                    title="MRII — main mechanism demonstration"
+                    loading="lazy"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <p className="mrii-video-caption">Main MRII demonstration · Embedded YouTube player · Use the player controls to watch.</p>
+              </div>
+              <div className="mrii-showcase-copy"><span className="data-label">FIG. 02 / THE MECHANISM</span><h3>A mechanical signal, not a proxy from motor current.</h3><p>MRII separates the rider-side input member from the downstream drive path through a compliant torsional element. The relative angular displacement across that coupling is the intended rider-effort signal. The video presents the mechanism as developed for Tirare.</p><div className="equation-card"><span>INTENDED MEASURAND</span><strong>Δθ = θ<sub>input</sub> − θ<sub>output</sub></strong><small>Relative angular displacement across the compliant coupling</small></div></div>
             </div>
             <div className="mrii-flow-section">
               <div className="flow-heading"><span>MECHANICAL ARCHITECTURE</span><p>Conceptual torque path described in the MRII design record.</p></div>
