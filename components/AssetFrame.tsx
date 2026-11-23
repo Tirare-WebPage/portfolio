@@ -17,6 +17,10 @@ type Props = {
   aspect?: Aspect;
   fit?: "cover" | "contain";
   controls?: boolean;
+  autoPlay?: boolean;
+  loop?: boolean;
+  clipStart?: number;
+  clipEnd?: number;
   className?: string;
 };
 
@@ -87,146 +91,6 @@ function MediaPlaceholder({
         {description ? <p>{description}</p> : null}
         <code>{src}</code>
       </div>
-    </div>
-  );
-}
-
-export default function AssetFrame({
-  kind,
-  src,
-  fallbackSrc,
-  title,
-  description,
-  alt,
-  aspect = "landscape",
-  fit = "cover",
-  controls = true,
-  className = "",
-}: Props) {
-  const [resolvedSrc, setResolvedSrc] = useState("");
-  const [missing, setMissing] = useState(false);
-  const [modelError, setModelError] = useState("");
-  const modelHost = useRef<HTMLDivElement>(null);
-  const primaryUrl = withBasePath(src);
-  const fallbackUrl = fallbackSrc ? withBasePath(fallbackSrc) : "";
-
-  // Do not preflight public files with fetch(HEAD). Some static hosts and local
-  // development configurations answer HEAD differently from GET. Let the real
-  // image/video/model/PDF request determine whether the asset exists.
-  useEffect(() => {
-    setMissing(false);
-    setModelError("");
-    setResolvedSrc(primaryUrl);
-  }, [primaryUrl, fallbackUrl, kind]);
-
-  const handleAssetError = () => {
-    if (fallbackUrl && resolvedSrc !== fallbackUrl) {
-      setResolvedSrc(fallbackUrl);
-      setModelError("");
-      return;
-    }
-    setMissing(true);
-    setResolvedSrc("");
-  };
-
-  useEffect(() => {
-    if (kind !== "model" || !resolvedSrc || !modelHost.current || missing) return;
-    let cancelled = false;
-    const host = modelHost.current;
-    host.replaceChildren();
-
-    loadModelViewer()
-      .then(() => {
-        if (cancelled || !modelHost.current) return;
-        const viewer = document.createElement("model-viewer");
-        viewer.setAttribute("src", resolvedSrc);
-        viewer.setAttribute("alt", alt || title);
-        viewer.setAttribute("camera-controls", "");
-        viewer.setAttribute("touch-action", "pan-y");
-        viewer.setAttribute("shadow-intensity", "0.65");
-        viewer.setAttribute("exposure", "1");
-        viewer.setAttribute("environment-image", "neutral");
-        viewer.setAttribute("camera-orbit", "35deg 72deg auto");
-        viewer.setAttribute("interaction-prompt", "none");
-        viewer.setAttribute("loading", "lazy");
-        viewer.className = "asset-model-viewer";
-        viewer.addEventListener("error", () => {
-          if (!cancelled) {
-            if (fallbackUrl && resolvedSrc !== fallbackUrl) {
-              setResolvedSrc(fallbackUrl);
-              setModelError("");
-            } else {
-              setModelError("The model file was reached, but it could not be rendered. Check that it is a valid, complete GLB export.");
-            }
-          }
-        }, { once: true });
-        host.appendChild(viewer);
-      })
-      .catch(() => {
-        if (!cancelled) setModelError("The 3D viewer library could not load. Check your internet connection and allow unpkg.com.");
-      });
-
-    return () => {
-      cancelled = true;
-      host.replaceChildren();
-    };
-  }, [kind, resolvedSrc, alt, title, missing, fallbackUrl]);
-
-  const wrapperClass = `asset-frame asset-${aspect} ${className}`.trim();
-  return (
-    <div className={wrapperClass}>
-      {missing ? <MediaPlaceholder kind={kind} title={title} description={description} src={src} /> : null}
-      {!missing && !resolvedSrc ? (
-        <div className="asset-loading" aria-label={`Loading ${title}`}>
-          <span className="asset-loading-line" /><span>{title}</span>
-        </div>
-      ) : null}
-      {!missing && resolvedSrc && kind === "image" ? (
-        <Image
-          src={resolvedSrc}
-          alt={alt || title}
-          fill
-          unoptimized
-          sizes="(max-width: 760px) 100vw, 50vw"
-          className={`asset-image fit-${fit}`}
-          onError={handleAssetError}
-        />
-      ) : null}
-      {!missing && resolvedSrc && kind === "video" ? (
-        <video
-          src={resolvedSrc}
-          controls={controls}
-          playsInline
-          preload="metadata"
-          muted
-          className="asset-video"
-          onError={handleAssetError}
-          aria-label={title}
-        />
-      ) : null}
-      {!missing && resolvedSrc && kind === "model" ? (
-        <>
-          <div className="asset-model-host" ref={modelHost} />
-          {modelError ? (
-            <div className="asset-model-error">
-              <Rotate3D size={20} />
-              <p>{modelError}</p>
-              <code>{resolvedSrc}</code>
-            </div>
-          ) : (
-            <span className="asset-interaction-hint">DRAG TO ROTATE · SCROLL TO ZOOM</span>
-          )}
-        </>
-      ) : null}
-      {!missing && resolvedSrc && kind === "pdf" ? (
-        <iframe
-          className="asset-pdf"
-          src={resolvedSrc}
-          title={title}
-          loading="lazy"
-          onError={handleAssetError}
-        />
-      ) : null}
     </div>
   );
 }
